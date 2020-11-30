@@ -676,19 +676,23 @@
         const imgAlfredo = document.getElementById("img-alfredo");
         
         imgAlfredo.addEventListener('mouseover', function(event){
-            this.classList.add("alfredo-trans");
+            this.addEventListener('click', function(event){
+                this.classList.add("alfredo-trans");
+            })
         
         })
-
-        imgAlfredo.addEventListener('mouseout', function(event){
-             this.classList.remove("alfredo-trans");
-        })
+        imgAlfredo.addEventListener('mouseleave', function(event){
+            this.classList.remove("alfredo-trans");
+        });
 
         const figureAnthem = document.querySelector(".img-anthem");
         const imgAnthem = figureAnthem.querySelector("img");
 
-        imgAnthem.addEventListener('mouseover', function(event){
-            this.classList.add("imgAnthem-trans");
+        imgAnthem.addEventListener('mouseover', function(event)
+        {
+            imgAnthem.addEventListener('click', function(event){
+                this.classList.add("imgAnthem-trans");
+            })
         })
 
         imgAnthem.addEventListener('mouseout', function(event){
