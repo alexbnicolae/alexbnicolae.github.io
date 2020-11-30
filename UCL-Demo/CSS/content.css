@@ -1,0 +1,288 @@
+a {
+    text-decoration: none;
+}
+
+/* Clase */
+
+/* Content menu */
+.content-menu {
+    border: 1px solid whitesmoke;
+    /* display: flex; */
+    /* flex-direction: column; */
+    width: 300px;
+    padding-bottom: 10px;
+    color: black;
+    /* text-decoration: underline; */
+}
+
+    /* Dropdown menu */
+.dropdown-content {
+    display: none;
+}
+
+.format:hover .dropdown-content{
+    display: block;
+}
+
+
+.prizes:hover .dropdown-content {
+    display: block;
+}
+
+[href^="#format"],
+[href^="#prizes"]{
+    color: black;
+}
+
+.raquo-ent {
+    color: blue;
+    font-weight: bold;
+}
+
+.history, 
+.anthem, 
+.format, 
+.prizes, 
+.qualification, 
+.group-stage-and-knockout-phase,
+.trophy-and-medals, 
+.prize-money
+{
+    display: block;
+    /* border: 1px solid blue; */
+    flex-grow: 0;
+    /* text-decoration: underline; */
+    color: black;
+    padding-left: 10px;
+    box-sizing: border-box;
+} 
+
+[href*="#format"]:hover > span,
+[href*="#prizes"]:hover > span,
+.history:hover, 
+.anthem:hover, 
+.qualification:hover, 
+.group-stage-and-knockout-phase:hover,
+.trophy-and-medals:hover, 
+.prize-money:hover {
+    
+    display: inline-block;
+    text-decoration: underline;
+}
+
+.qualification,
+.group-stage-and-knockout-phase, 
+.trophy-and-medals, 
+.prize-money
+ {
+    padding-left: 20px;
+}
+
+/* History */
+.history-article {
+    text-align: justify;
+    margin: 0 10px 0 10px;
+    overflow: auto;
+    
+}
+
+.h2-history {
+    border-bottom: 1px solid black;
+}
+
+.container-alfredo {
+    border: 2px solid whitesmoke;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    float: right;
+    margin: -10px 10px -10px 10px;
+    padding: 10px 0 10px 0;
+    overflow: hidden;
+    background-color: rgb(212, 212, 212);
+}
+.p-alfredo {
+    display: flex;
+    justify-content: flex-end;
+    align-self: center;
+    flex-wrap: wrap;
+    height: 50%;
+
+    width: 80%;
+    font-size: 14px;
+    padding-top: -10px;
+
+}
+
+/* Anthem */
+.anthem-article {
+    text-align: justify;
+    margin: 0 10px 0 10px;
+    /* border: 1px solid red; */
+    /* height: 420px; */
+    /* overflow: hidden; */
+}
+.h2-anthem {
+    border-bottom: 1px solid black;
+}
+
+.img-anthem {
+    border: 1px solid white;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    align-items: center;
+    float: left;
+    margin-right: 10px;
+    padding: 10px;
+    background-color: rgb(212, 212, 212);
+
+}
+
+.img-anthem > img {
+    width: 100%;
+
+}
+
+.img-anthem > figcaption {
+    flex-wrap: wrap;
+    font-size: 12px;
+    padding: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* overflow: auto; */
+
+}
+
+/* .anthem-article > p:nth-of-type(2), 
+.anthem-article > p:nth-of-type(3)
+{
+    display: flex;
+    border: 1px solid red;
+} */
+
+/* Format article */
+
+.format-article {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: justify;
+}
+
+.format-article h2 {
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+
+.format-article table {
+    border: 1px solid white;
+    border-collapse: collapse;
+    width: 80%;
+    overflow: auto;
+}
+
+.format-article table td {
+    border: 1px solid white;
+    padding: 5px;
+    
+}
+
+.format-article table tr td strong div {
+    text-align: center;
+}
+
+/* ID-uri */
+
+#introduction {
+    text-align: justify;
+    margin: 0 10px 0 10px;
+}
+
+#h3-cm {
+    text-align: center;
+}
+
+#img-alfredo {
+    width: 80%;
+    height: 10%;
+    align-self: center;
+}
+
+#div-table {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+#prizes {
+    text-align: justify;
+    margin-left: 10px;
+}
+
+#prizes h2 {
+    border-bottom: 1px solid black;
+}
+
+#prizes figure {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    float: right;
+    height: 100%;
+    border: 1px solid white;
+    padding: 5px;
+    background-color: rgb(212, 212, 212);
+    margin-top: 50px;
+}
+
+#prizes figure img {
+    height: 300px;
+}
+
+#prizes figure figcaption{
+    padding-top: 5px;
+    text-align: center;
+    font-size: 12px;
+}
+
+
+@media(max-width: 320px)
+{
+    #prizes {
+        display: flex;
+        flex-direction: column;
+    }
+     #prizes figure {
+        align-self: center;
+    } 
+}
+
+@media(max-width: 375px)
+{
+     #prizes figure {
+        margin: 10px;
+    } 
+}
+@media(max-width: 425px)
+{
+    body{
+        width: 100%;
+    }
+
+    .content-menu {
+        display: flex;
+        flex-direction: column;
+        width:100%;
+        align-self: center;
+    }
+
+    .container-alfredo {
+        margin-bottom: 10px;
+    }
+
+    #prizes figure {
+        margin-top: 0;
+    }
+}
+

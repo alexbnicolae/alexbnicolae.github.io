@@ -1,0 +1,99 @@
+@font-face {
+    font-family: itc-novarese-std-ultra;
+    src: url(../itc-novarese-std-ultra.otf)
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    position: relative;
+    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* border: 1px solid blue; */
+    background-color: rgb(235, 232, 232);
+    box-shadow: 0 0 15px blue;
+    height: 175px;
+    background-image: url(../Imagini/maxresdefault.jpg);
+    z-index: 2;
+    overflow: hidden;
+    
+}
+
+/* Clase */
+
+.section1 {
+    width: calc(100% - 200px);
+    display: flex;
+    text-align: center;
+    align-items: center;
+    /* border: 1px solid yellowgreen; */
+    margin: 10px;
+    justify-content: center;
+    height: 100%;
+    
+}
+
+
+/* ID-uri */
+
+#img-header {
+    height: calc(100% - 10px);
+    margin-left: 20px;
+    background-color: rgb(250, 248, 117);
+    box-shadow: 0px 0px 30px red;
+}
+
+#trofeu-ucl {
+    height: 100%;
+    margin-right: 20px;
+    /* background-color: rgba(24, 224, 231, 0.835); */
+    /* box-shadow: 0px 0px 30px red; */
+}
+
+#titlu {
+    /* text-align: center; */
+    /* border: 1px solid red; */
+    /* font-size: xx-large; */
+    color: rgb(73, 182, 255);
+    font-family: itc-novarese-std-ultra, sans-serif;
+    align-self: center;
+    font-size: 50px;
+    text-shadow: 5px -5px 5px red;
+}
+
+
+/* Responsive */
+
+@media (max-width: 1024px)
+{
+    #titlu {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 900px)
+{
+    #titlu {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 620px)
+{
+    #img-header {
+        display: none;
+    }
+}
+
+@media (max-width: 460px)
+{
+    #trofeu-ucl {
+        display: none;
+    }
+}
