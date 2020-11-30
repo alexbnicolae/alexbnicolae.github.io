@@ -68,3 +68,22 @@ footer > div:nth-of-type(3) span {
     padding: 5px;
     margin: 5px;
 }
+
+@media (max-width: 670px)
+{
+    footer > div:nth-child(2) > div:nth-child(2)
+    {
+        display: flex;
+        justify-content: center;
+        
+    }
+    
+    footer > div:nth-child(2) > div:nth-child(2) > ul {
+        display: flex;
+        flex-direction: column;
+    }
+ 
+    footer > div:nth-child(2) > div:nth-child(2) > li {
+        padding: 5px;
+    }
+}
