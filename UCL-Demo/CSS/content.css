@@ -4,6 +4,14 @@ a {
 
 /* Clase */
 
+.alfredo-trans {
+    transform:scale(2) translateX(-30px);
+}
+
+.imgAnthem-trans {
+    transform:scale(2) translateX(50px);
+}
+
 /* Content menu */
 .content-menu {
     border: 1px solid whitesmoke;
@@ -98,7 +106,7 @@ a {
     float: right;
     margin: -10px 10px -10px 10px;
     padding: 10px 0 10px 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: rgb(212, 212, 212);
 }
 .p-alfredo {

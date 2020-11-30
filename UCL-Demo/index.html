@@ -672,6 +672,30 @@
     </footer>
     <!-- End Footer -->
     <script type="text/javascript" src="JS/script.js"></script>
+    <script>
+        const imgAlfredo = document.getElementById("img-alfredo");
+        
+        imgAlfredo.addEventListener('mouseover', function(event){
+            this.classList.add("alfredo-trans");
+        
+        })
+
+        imgAlfredo.addEventListener('mouseout', function(event){
+             this.classList.remove("alfredo-trans");
+        })
+
+        const figureAnthem = document.querySelector(".img-anthem");
+        const imgAnthem = figureAnthem.querySelector("img");
+
+        imgAnthem.addEventListener('mouseover', function(event){
+            this.classList.add("imgAnthem-trans");
+        })
+
+        imgAnthem.addEventListener('mouseout', function(event){
+            this.classList.remove("imgAnthem-trans");
+        })
+
+    </script>
 
 </body>
 </html>
