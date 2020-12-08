@@ -690,13 +690,19 @@
 
         imgAnthem.addEventListener('mouseover', function(event)
         {
-            imgAnthem.addEventListener('click', function(event){
-                this.classList.add("imgAnthem-trans");
+            imgAnthem.addEventListener('click', function(event)
+            {
+                if (this.classList.contains("imgAnthem-trans") == false)
+                {
+                    this.classList.add("imgAnthem-trans");
+                    console.log("add")
+                }
+                else
+                {
+                    this.classList.remove("imgAnthem-trans");
+                    console.log("remove")
+                }
             })
-        })
-
-        imgAnthem.addEventListener('mouseout', function(event){
-            this.classList.remove("imgAnthem-trans");
         })
 
     </script>
