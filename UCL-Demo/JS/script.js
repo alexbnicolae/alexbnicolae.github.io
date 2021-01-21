@@ -1,19 +1,4 @@
-// Create a button with Hide/Show property
-var btnUclTrophy = document.querySelector(".btn-ucl-trophy");
-var imageUclTrophy = document.getElementById("uclTrophy");
 
-imageUclTrophy.style.visibility = "visible";
-btnUclTrophy.addEventListener('click', function(event) {
-    if(imageUclTrophy.style.visibility == "visible")
-    {
-        imageUclTrophy.style.visibility = "hidden";
-    }            
-    else 
-    {
-        imageUclTrophy.style.visibility = "visible";
-    }
-    
-})
 
 //Create Inputs for radio buttons
 
@@ -37,13 +22,12 @@ bgColor.addEventListener('click', function(event) {
         document.querySelector(".haos").children[1].innerText = "Click on checkbox to delete!"
 
         cbc++;
-    }
-
-    
-    
+    } 
 
    inputBgColor.addEventListener('keyup', function(event){
        body.style.backgroundColor = event.target.value;
+       let x = event.key;
+       document.querySelector(".haos").children[2].innerHTML = "<br> The pressed key was: " + x + ".";
    }) 
 
    if(cbc == 1)
@@ -53,6 +37,7 @@ bgColor.addEventListener('click', function(event) {
             inputBgColor.remove();
             checkboxBgColor.remove();
             document.querySelector(".haos").children[1].innerText = "";
+            document.querySelector(".haos").children[2].innerHTML = "";
             cbc = 0;
        }) 
    }
@@ -78,6 +63,8 @@ fontColor.addEventListener('click', function(event) {
 
     inputFontColor.addEventListener('keyup', function(event){
         body.style.color = event.target.value;
+        let x = event.key;
+        document.querySelector(".haos2").children[2].innerHTML = "<br> The pressed key was: " + x + ".";
     })
 
     if (cfc == 1)
@@ -86,6 +73,7 @@ fontColor.addEventListener('click', function(event) {
             inputFontColor.remove();
             checkboxFontColor.remove();
             document.querySelector(".haos2").children[1].innerText = "";
+            document.querySelector(".haos2").children[2].innerHTML = "";
             // document.querySelector(".haos2").removeChild(document.querySelector(".haos2").childNodes[0]);
             cfc = 0;
         });
@@ -112,6 +100,8 @@ fontSize.addEventListener('click', function(event) {
 
      inputFontSize.addEventListener('keyup', function(event) {
          body.style.fontSize = event.target.value;
+         let x = event.key;
+         document.querySelector(".haos3").children[2].innerHTML = "<br> The pressed key was: " + x + ".";
      })
 
      if (cfs == 1)
@@ -120,6 +110,7 @@ fontSize.addEventListener('click', function(event) {
              inputFontSize.remove();
              checkboxFontSize.remove();
              document.querySelector(".haos3").children[1].innerText = "";
+             document.querySelector(".haos3").children[2].innerHTML = "";
              //document.querySelector(".haos3").removeChild(document.querySelector(".haos3").childNodes[0]);
              cfs = 0;
          })

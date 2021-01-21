@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Us!</title>
+    <link rel="stylesheet" href="../CSS/nav-menu.css">
+    <link rel="stylesheet" href="../CSS/header.css">
+    <link rel="stylesheet" href="../CSS/body.css">
+    <link rel="stylesheet" href="../CSS/footer.css">
+    <link rel="stylesheet" href="../CSS/gallery.css">
+    <link rel="stylesheet" href="../CSS/review.css">
+    <link rel="stylesheet" href="../CSS/support.css">
+    <link rel="icon" type="image/png" href="../Imagini/210px-UEFA_Champions_League_logo_2.svg.png">
+</head>
+<body>
+    
+     <!-- Header Start -->
+     <header>
+        <img id="img-header" src="../Imagini/210px-UEFA_Champions_League_logo_2.svg.png" alt="">
+        
+        <section class="section1">
+            <div id="titlu">
+                <h1 class="titlu-js">
+                    Uefa Champions League
+                </h1>
+            </div>
+        </section>
+        <img id="trofeu-ucl" src="../Imagini/ucl-trofeu.png" alt="">
+    </header>
+    <!-- Header End -->
+
+    <nav class="nav-style">
+        <a href="../index.html">Home</a>
+        <a href="Stats.html">Stats</a>
+        <a href="Gallery.html">Gallery</a>
+        <a href="JS.html">Review</a>
+        <a href="Support.html">Be our supporter!</a>
+    </nav>
+    <!-- Formular -->
+
+    <div id="formular">
+        <form  method="POST" action="http://localhost:5000/save">
+            <div class="Label-Input">
+                <label>Name:</label>
+                <input required="required" type="text" name="name"> 
+            </div>
+            
+            <div class="Label-Input">
+                <label>Age:</label> 
+                <input required="required" type="number" name="age" step="1" max="200" min="0">
+            </div>
+            
+            <div class="Label-Input">
+                <label>City:</label>
+                <input required="required" type="text" name="city">
+            </div>
+
+            <div class="buton">
+                <button class="button-send" type="submit"> Send </button>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <form  method="GET" action="http://localhost:5000/show">
+            <div class="button-noXML">
+                <button class="button-no-XML" type="submit"> Show the supporters! </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="button-XML">
+        <button class="buttonXML" type="submit"> Show the supporters with XML! </button>
+    </div>
+
+    <!-- For Java Script -->
+    <div>
+        <label><h2 class="h2-js">Let's create something:</h2></label> 
+       
+            <input  class="js-bg"  type="radio" name="radio_test" value="1"> Input for Background color 
+            <span class="haos">
+                <span></span>
+                <span class="js-span"></span>
+                <span></span>
+            </span><br>
+
+            <input  class="js-fc"  type="radio" name="radio_test" value="2"> Input for Font color 
+            <span class="haos2">
+                <span></span>
+                <span class="js-span"></span>
+                <span></span>
+            </span><br>
+    
+            <input  class="js-fs"  type="radio" name="radio_test" value="3"> Input for Font size
+            <span class="haos3">
+                <span></span>
+                <span class="js-span"></span>
+                <span></span>
+            </span>
+
+            <div class="classNames">
+            </div>
+
+    </div>
+
+
+    <!-- Start Footer -->
+    <footer>
+    <div>
+        <span>Articles related to UEFA Champions League</span> 
+    </div>
+
+    <div>
+        <div>
+            References:
+        </div>
+        <div>
+            <ul>
+                <li>
+                    <a href="https://en.wikipedia.org/wiki/UEFA_Champions_League" target="_blank">Wikipedia.com</a>
+                </li>
+                <li>
+                    <a href="https://www.uefa.com/uefachampionsleague/history/rankings/" target="_blank">UCL.com</a>
+                </li>
+                <li>
+                    <a href="https://www.transfermarkt.com/liverpool-vs-milan-and-6-minutes-of-insanity-the-2005-champions-league-final/view/news/357369">
+                        Transfermarkt.com
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.fourfourtwo.com/gallery/25-best-champions-league-games-ever-all-time">FourFourTwo.com</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+        
+    <div>
+        <span>&copy; 2020 Tema Tehnici Web</span> 
+        <span>Boranescu Alexandru-Nicolae Grupa 312</span> 
+    </div>
+    </footer>
+    <!-- End Footer -->
+    <script  type="text/javascript" src="../JS/form.js"></script>
+    <script type="text/javascript" src="../JS/titlu.js"></script>
+    <script type="text/javascript" src="../JS/script.js"></script>
+
+</body>
+</html>
