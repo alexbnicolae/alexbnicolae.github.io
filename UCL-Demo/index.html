@@ -17,12 +17,10 @@
     
     <!-- Start Header -->
     <header>
-        
         <img id="img-header" src="Imagini/210px-UEFA_Champions_League_logo_2.svg.png" alt="">
-
         <section class="section1">
             <div id="titlu">
-                <h1>
+                <h1 class="titlu-js">
                     Uefa Champions League
                 </h1>
             </div>
@@ -38,7 +36,8 @@
         <a href="index.html">Home</a>
         <a href="HTML/Stats.html">Stats</a>
         <a href="HTML/Gallery.html">Gallery</a>
-        
+        <a href="HTML/JS.html">Review</a>
+        <a href="HTML/Support.html">Be our supporter!</a> 
     </nav>
 
 
@@ -532,13 +531,13 @@
             </div>
         </div>
     
-</article>
+    </article>
 
-<article id="prizes">
-    <h2>Prizes</h2>
+    <article id="prizes">
+        <h2>Prizes</h2>
 
-    
-    <figure>
+
+        <figure>
             <button class="btn-ucl-trophy">Hide/Show Image</button>
             <img id="uclTrophy" src="Imagini/Trofeo_UEFA_Champions_League.jpg" alt="">
             <figcaption>Official trophy</figcaption> 
@@ -616,22 +615,27 @@
             <span class="haos">
                 <span></span>
                 <span class="js-span"></span>
+                <span></span>
             </span><br>
 
             <input  class="js-fc"  type="radio" name="radio_test" value="2"> Input for Font color 
             <span class="haos2">
                 <span></span>
                 <span class="js-span"></span>
+                <span></span>
             </span><br>
     
             <input  class="js-fs"  type="radio" name="radio_test" value="3"> Input for Font size
             <span class="haos3">
                 <span></span>
                 <span class="js-span"></span>
+                <span></span>
             </span>
 
-    </div>
+            <div class="classNames">
+            </div>
 
+    </div>
     <!-- End Content -->
 
 
@@ -672,7 +676,24 @@
     </footer>
     <!-- End Footer -->
     <script type="text/javascript" src="JS/script.js"></script>
+    <script type="text/javascript" src="JS/titlu.js"></script>
     <script>
+    // Create a button with Hide/Show property
+    var btnUclTrophy = document.querySelector(".btn-ucl-trophy");
+    var imageUclTrophy = document.getElementById("uclTrophy");
+
+    imageUclTrophy.style.visibility = "visible";
+    btnUclTrophy.addEventListener('click', function(event) {
+        if(imageUclTrophy.style.visibility == "visible")
+        {
+            imageUclTrophy.style.visibility = "hidden";
+        }            
+        else 
+        {
+            imageUclTrophy.style.visibility = "visible";
+        }
+    
+    })
         const imgAlfredo = document.getElementById("img-alfredo");
         
         imgAlfredo.addEventListener('mouseover', function(event){
