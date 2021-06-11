@@ -4,7 +4,7 @@ from .forms import PostForm
 from django.contrib import messages
 
 class HomePageView(TemplateView):
-    template_name ="home.html"
+    template_name ="index.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
