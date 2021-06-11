@@ -1,0 +1,48 @@
+{% extends 'homepage.html' %}
+
+{% block title %} {{user.username}} {% endblock title %}
+
+{% block content %}
+
+    <div class="mt-20">
+         {% if user.is_authenticated %}
+            <div class="flex items-center justify-center">
+                <div class="">
+                    <div class="bg-yellow-100 shadow-xl rounded-lg py-3 h-96 w-96" style="border:1px solid black">
+                        <div class="p-2 mt-6">
+                            <h2 class="text-center text-3xl text-gray-900 leading-8">Teacher's Profile:</h2>
+                            <table class="text-base mt-3">
+                                <div class="mt-5">
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">Courses:</td>
+                                            <td class="pr-2 py-2">
+                                                {% for teacher in teachers %}
+                                                    {% if post.id == teacher.teacher.user.id %}
+                                                        <div><ul class="m-0 list-disc"><li>{{teacher.course.name}}</li></ul></div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">First name:</td>
+                                            <td class="px-2 py-2">{{post.first_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">Last name:</td>
+                                            <td class="px-2 py-2">{{post.last_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">Email:</td>
+                                            <td class="px-2 py-2">{{post.email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+         {% endif %}
+    </div>
+{% endblock content %}

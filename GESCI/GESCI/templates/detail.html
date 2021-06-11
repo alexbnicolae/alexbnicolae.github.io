@@ -4,14 +4,33 @@
 
 {% block content %}
 
+    <div class="mt-20">
+        <div class="flex justify-center">
+            <h2 class="flex justify-center w-1/4 text-4xl mb-2 font-semibold font-heading font-semibold py-3 rounded-lg bg-blue-400" style="border: 1px solid black">Edit profile</h2>
+        </div>
+        <div class="flex justify-center" >    
+            <div class="rounded-lg w-96 h-96 p-10 bg-blue-400 shadow-xl" style="border: 1px solid black">
+                <form method="POST" action="" class="login">
+                    {% csrf_token %}
+                    <p>
+                        <label for="id_first_name">First name:</label> 
+                        <input type="text" name="first_name" value="{{user.first_name}}" class="form-control" maxlength="25" required="" id="id_first_name">
+                    </p>
+                    <p>
+                        <label for="id_last_name">Last name:</label> 
+                        <input type="text" name="last_name" value="{{user.last_name}}" class="form-control" maxlength="25" required="" id="id_last_name">
+                    </p>
+                    <p>
+                        <label for="id_email">Email:</label> 
+                        <input type="email" name="email" value="{{user.email}}" class="form-control" required="" id="id_email">
+                    </p>
+                    <p>
+                        <label for="id_password">Password:</label> 
+                        <a href="{% url 'password_change' %}" class="text-red-600">Change password</a>
 
-    <h1>Edit profile</h1>
-    <br/>
-
-    <div>
-        <form method="POST" action="" class="col-sm-4 offset-4 py-7 my-3 px-5">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="sumbit" class="btn btn-lg btn-success"> Update Profile </button>
+                    </p>
+                    <button type="sumbit" style="border: 1px solid black" class="primaryAction btn btn-lg btn-warning form-control"> Update Profile </button>
+            </div>
+        </div>
     </div>
 {% endblock content %}

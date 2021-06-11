@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Title changed{%endblock%}
+
+{%block body%}
+    <div id="posts-container">
+        {% for post in posts %}
+            <!-- component is from https://tailwindcomponents.com/component/post-artical-->
+            {% include "includes/post.html" with post=post show_detail_link=True %}
+        {% endfor %}
+    </div>
+{%endblock%}
+

@@ -1,0 +1,35 @@
+{% extends 'homepage.html' %}
+
+{% block title %} Courses {% endblock title %}
+
+{% block content %}
+    <div style="margin:0;">    
+       <!-- This is an example component -->
+        <div class="w-full h-screen bg-center bg-no-repeat bg-cover" style="background-image: url('https://images.unsplash.com/photo-1609342475528-dd7d93e8311e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80');">
+            <div class="w-full h-screen bg-opacity-50 bg-black flex justify-center items-center">
+                <div class="mx-4 text-center text-white">
+                {% if request.user.is_authenticated %}
+                    {% if user.is_student %}
+                        <h1 class="font-bold text-6xl mb-4">Welcome, student!</h1>
+                    {% elif user.is_teacher %}
+                        <h1 class="font-bold text-6xl mb-4">Welcome, teacher!</h1>
+                    {% elif user.is_admin %}
+                        <h1 class="font-bold text-6xl mb-4">Welcome, admin!</h1>
+                    {% endif %}
+                    <h2 class="font-bold text-3xl mb-12">{{user.first_name}} {{user.last_name}}</h2>
+                    <div>
+                            <a href="{% url 'student_courses' %}" class="bg-blue-500 rounded-md font-extrabold text-white text-center px-4 py-3 transition duration-300 ease-in-out  text-xl   hover:bg-blue-600 mr-2">
+                                See your courses!
+                            </a>
+                {% else %}
+                        <h1 class="font-bold text-6xl mb-4">Welcome!</h1>
+                        <a href="{% url 'account_login' %}" class="bg-red-500 rounded-md font-extrabold text-white text-center px-3 py-3 transition duration-300 ease-in-out hover:bg-red-600 ml-2 text-xl" >
+                            Log in!
+                        </a>
+                {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

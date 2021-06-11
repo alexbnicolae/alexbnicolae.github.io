@@ -1,0 +1,33 @@
+{% extends 'homepage.html' %}
+
+{% block title %} Courses {% endblock title %}
+
+{% block content %}
+
+    <div style="margin:20px;">
+        {% if request.user.is_authenticated == True %}
+    
+            <div>
+                <h2 class="underline flex flex-col mb-5"> 
+                            {{post.course.name}}
+                </h2>
+            </div>
+
+            <h4 class= " px-5 mb-5"> 
+                <div>Teacher: {{post.teacher.user.first_name}} {{post.teacher.user.last_name}}</div> 
+            </h4>
+
+            <div class= "mb-5" >
+                <h2 class="underline mb-5">Information:</h2>
+                <p class="ml-2 text-2xl text-justify px-5">{{post.text}}</p>
+            </div>
+        
+        {% endif %}
+
+        {% if user.is_teacher == True %}
+                <a href="{% url 'form_course' post.id %}">
+                    <button class="primaryAction btn btn-lg btn-success" type="submit">Edit</button>
+                </a>
+        {% endif %}
+    </div>    
+{% endblock content%}

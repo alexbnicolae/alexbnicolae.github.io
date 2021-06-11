@@ -1,0 +1,67 @@
+{% extends 'homepage.html' %}
+
+{% block title %} {{user.username}} {% endblock title %}
+
+{% block content %}
+
+    <div class="mt-20">
+        {% for item in items %}
+             {% if request.user.id == item.id %}
+                <div class="flex items-center justify-center">
+                    <div class="">
+                        <div class="bg-yellow-100 shadow-xl rounded-lg py-3 h-96 w-96" style="border:1px solid black">
+                            <div class="p-2 mt-6">
+                                <h2 class="text-center text-3xl text-gray-900 leading-8">My profile:</h2>
+                                <table class="text-base my-3">
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">Rang:</td>
+                                            {% if item.is_student %}
+                                                <td class="px-2 py-2">Student</td>
+                                            
+                                            {% elif item.is_teacher %}
+                                                <td class="px-2 py-2">Teacher</td>
+
+                                            {% elif item.is_admin %}
+                                                <td class="px-2 py-2">Admin</td>
+                                            {% endif %}
+                                        </tr>
+                                        {% if item.is_student %}
+                                            {% for group in groups  %}
+                                                {% if item.username == group.student.user.username %}
+                                                    <tr>
+                                                        <td class="px-2 py-2 text-gray-500 font-semibold">Group:</td>
+                                                        <td class="px-2 py-2">{{group.group.number}}</td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">First name:</td>
+                                            <td class="px-2 py-2">{{item.first_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">Last name:</td>
+                                            <td class="px-2 py-2">{{item.last_name}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-2 text-gray-500 font-semibold">Email:</td>
+                                            <td class="px-2 py-2">{{item.email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="text-center my-3">
+                                    <a class="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium" href="{% url 'detail' %}">
+                                        <button type="sumbit" style="border: 1px solid black" class="btn btn-lg btn-primary"> Edit Profile </button>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}

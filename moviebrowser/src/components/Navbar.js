@@ -9,7 +9,7 @@ const Navbar = ({searchText, setSearchText}) => {
     const updateSearchText = (e) => {
         if(e.keyCode !== 8)
         {
-            history.push('/searchPage')
+            // history.push('/searchPage')
             setSearchText(e.target.value)
         }
 
@@ -37,7 +37,7 @@ const Navbar = ({searchText, setSearchText}) => {
               </li>
             </ul>
             <form className="d-flex">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchText} onChange={updateSearchText} onKeyDown={updateSearchText}/>
+              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={searchText} onKeyDown={updateSearchText} onChange={updateSearchText} />
               <Link to={detailUrl} className="btn btn-primary">Search</Link>
             </form>
           </div>

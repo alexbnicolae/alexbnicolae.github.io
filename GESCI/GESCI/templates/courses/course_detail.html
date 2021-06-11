@@ -1,0 +1,56 @@
+{% extends 'homepage.html' %}
+
+{% block title %} Courses {% endblock title %}
+
+{% block content %}
+        {% if request.user.is_authenticated == True %}
+            <article class="px-4 mt-20 ">
+                <div class="flex flex-col">
+                    <div class="flex justify-center mb-5">  
+                        <div class="py-3 rounded-lg bg-gray-200 w-1/2" style="border: 1px solid black" >
+                            <h1 class="flex justify-center text-4xl mb-4 font-semibold font-heading font-semibold">{{post.course.name}}</h1>
+                            <p class="flex justify-center m-0">
+                                <span>Teacher: </span>
+                                <a class="ml-1 text-indigo-600 hover:underline" href="{% url 'users_profile' post.teacher.user.id%}">{{post.teacher.user.first_name}} {{post.teacher.user.last_name}}</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div  class="flex justify-center">
+                        <div class=" w-1/2 px-5 py-3 rounded-lg bg-gray-200" style="border: 1px solid black">
+                                <p class="flex justify-center mb-4 text-justify whitespace-pre-line"> 
+                                    {{post.text}}
+                                <p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        {% endif %}
+
+
+        <div class="flex justify-center my-5">
+            <div>
+                {% if user.is_teacher == True and post.teacher.user.id == user.id or user.is_admin == True %}
+                    <a href="{% url 'form_course' post.id %}">
+                        <button class="primaryAction btn btn-success w-96 h-14" type="submit">
+                            <span class="text-3xl">
+                                Edit information
+                            </span>
+                        </button>
+                    </a>
+                {% endif %}
+
+                <a href="{% url 'student_courses' %}" >
+                        <button class="primaryAction btn btn-secondary w-96 h-14" type="submit">
+                            <span class="text-3xl">
+                                Go back!
+                            </span>
+                        </button>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+        
+{% endblock content%}

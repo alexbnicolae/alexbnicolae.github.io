@@ -15,17 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Users.views import HomePage,  Attend, Classes, ProfileDetailView, UserEditView
+from Users.views import HomePage, UserEditView, PasswordChange, Classes, ProfileDetailView, edit_post, course_detail, show_course_detail,  users_profile
 from django.conf.urls import include, url 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name="home"),
-    url('', include("allauth.urls")),
     path("profile/", UserEditView.as_view(), name="detail"),
     path("classes/<str:name>/", Classes.as_view(), name="classes"),
-    path("courses/<str:name>/", Attend.as_view(), name="attend"),
-    # path("courses/", CreateCourses.as_view(), name="courses"),
-    
-
+    path("password/", PasswordChange.as_view(), name="password_change"),
+    path("my_profile/", ProfileDetailView.as_view(), name="my_profile"),
+    path("course_detail/<int:pk>", show_course_detail, name="course_detail"),
+    path("course/", course_detail, name="student_courses"),
+    path("form_course/<int:pk>", edit_post, name="form_course"),
+    path("users_profile/<int:pk>", users_profile, name="users_profile"),
+    url('', include("allauth.urls")),
 ]

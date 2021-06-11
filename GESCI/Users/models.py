@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models.constraints import UniqueConstraint
 from django.db.models.deletion import CASCADE
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -47,11 +46,13 @@ class User(AbstractBaseUser):
     username = models.CharField(max_length=30)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    date_of_birth = models.DateField()
-    is_active = models.BooleanField(default=True)
+    date_of_birth = models.DateField(default='1900-01-01')
+    last_login = models.DateTimeField(verbose_name='last login', auto_now=True)
     is_admin = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     is_teacher = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
 
     objects = MyUserManager()
 
@@ -85,6 +86,11 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
     
+class Groups(models.Model):
+    number = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.number
 
 class Student(models.Model):
     user = models.OneToOneField(
@@ -92,9 +98,8 @@ class Student(models.Model):
         on_delete=models.CASCADE,
         related_name="student"
     )
-
     def __str__(self):
-        return self.user.username
+        return self.user.username 
 
 class Teacher(models.Model):
     user = models.OneToOneField(
@@ -109,19 +114,37 @@ class Teacher(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=25)
 
+    def __str__(self):
+        return self.name
+class StudentGroup(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student12")
+    group = models.ForeignKey(Groups, on_delete=CASCADE, related_name="group12")
+    class Meta:
+        unique_together=[['student', 'group']]
+
+    def __str__(self):
+        return self.student.user.username + '-' + self.group.number
 class Attendance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student1")
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course1")
+    group = models.ForeignKey(Groups, on_delete=CASCADE, related_name="group1")
     class Meta:
-        unique_together=[['student', 'course']]
+        unique_together=[['student', 'course', 'group']]
+
+    def __str__(self):
+        return self.student.user.username + '-' + self.course.name + '-' + self.group.number
 
 class Class(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student2")
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="teacher2")
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course2")
+    group = models.ForeignKey(Groups, on_delete=CASCADE, related_name="group2")
+    text = models.TextField()
 
     class Meta:
-        unique_together=[['student', 'teacher', 'course']]
+        unique_together=[['teacher', 'course', 'group']]
+
+    def __str__(self):
+        return self.teacher.user.username    + '-' + self.course.name + '-' + self.group.number
 
 class Teaching(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="teacher")
@@ -129,14 +152,12 @@ class Teaching(models.Model):
     class Meta:
         unique_together=[['teacher', 'course']]
 
-@receiver(post_save, sender=User)
-def create_student_profile(sender, instance, created, **kwargs):
-    if created and instance.is_student == True :
-        Student.objects.create(user=instance)
+    def __str__(self):
+        return self.teacher.user.username + '-' + self.course.name
 
 @receiver(post_save, sender=User)
 def create_student_profile(sender, instance, created, **kwargs):
     if created and instance.is_teacher == True :
         Teacher.objects.create(user=instance)
-
-
+    elif created and instance.is_student == True :
+        Student.objects.create(user=instance)

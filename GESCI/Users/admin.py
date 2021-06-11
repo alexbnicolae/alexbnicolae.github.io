@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Student, User, Teacher, Course, Attendance, Teaching, Class
+from .models import Student, User, Teacher, Course, Attendance, Teaching, Class, Groups, StudentGroup
 from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -59,19 +59,19 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'date_of_birth', 'first_name', 'last_name', 'is_admin', 'is_student', 'is_teacher')
+    list_display = ('id','username', 'email', 'date_of_birth', 'first_name', 'last_name',  'is_admin', 'is_student', 'is_teacher')
     list_filter = ('is_admin', 'is_student', 'is_teacher')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('date_of_birth', 'username', 'first_name', 'last_name')}),
-        ('Permissions', {'fields': ('is_admin', 'is_student', 'is_teacher')}),
+        ('Permissions', {'fields': ('is_superuser','is_active' ,'is_admin', 'is_student', 'is_teacher')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'username', 'date_of_birth', 'password1', 'password2','is_student', 'is_teacher')}
+            'fields': ('email', 'username', 'first_name', 'last_name', 'password1', 'password2','is_admin','is_student', 'is_teacher')}
         ),
     )
     search_fields = ('email',)
@@ -112,3 +112,16 @@ class ClassAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Class, ClassAdmin)
+
+class GroupsAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Groups, GroupsAdmin)
+
+class StudentGroupsAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(StudentGroup, StudentGroupsAdmin)
+
+
+

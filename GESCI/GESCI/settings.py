@@ -143,7 +143,7 @@ ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
-ACCOUNT_LOGUT_REDIRECT = '/'
+ACCOUNT_LOGOUT_REDIRECT = '/'
 ACCOUNT_PRESERVE_USER_CASING = False
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = True
@@ -152,3 +152,10 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend"
 )
+
+STATICFILES_DIRS = [
+    os.path.join(PROJ_DIR, "frontend/")
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_URL = "/static/"

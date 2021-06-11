@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block title %}{{post.text}} by {{post.author.username}}{%endblock%}
+
+{% block body %}
+     <!-- component -->
+        {% include "includes/post.html" with post=post %}
+{% endblock body %}
