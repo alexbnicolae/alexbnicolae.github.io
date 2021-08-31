@@ -9,7 +9,15 @@
             <div class="flex justify-center mb-10">
               <h2 class="flex justify-center underline w-1/4 text-4xl mb-2 font-semibold font-heading font-semibold py-3 rounded-lg bg-blue-200" style="border: 1px solid black">My courses:</h2>
             </div>
-        
+
+            <div class="flex justify-center mb-4">
+              <form method="POST" action="">
+                {% csrf_token %} 
+                <input style="width: 300px;" type="search" class="bg-purple-white shadow rounded border-0 p-3 " placeholder="Search a course by name..." name = "searched">
+                <button type="submit" class="btn btn-success" style="border: 1px solid black">Search</button>
+              </form>
+            </div>
+
             {% for course in page.object_list %}
                 {% if course.student.user.username == user.username %}
                   <div class="flex justify-center mb-20">
@@ -26,20 +34,32 @@
                         <div class="relative bg-blue-200">
                           <div class="py-10 px-8">
                             <h3 class="text-2xl font-bold flex justify-center mb-3">{{course.course.name}}</h3>
-
                             <div class="flex flex-col justify-center">
-                              {% for item in items  %}
-                                    {% if item.course.name == course.course.name and item.group.number == course.group.number %}
-                                      <div class="text-gray-600 text-sm font-medium flex mb-2  justify-center">
-                                        Teacher: {{item.teacher.user.first_name}} {{item.teacher.user.last_name}}
+                            {% for item in items  %}
+                              {% if course.course == item.course and course.group == item.group %}
+                                <div class="text-gray-600 text-sm font-medium mb-2 justify-center">
+                                      <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                                        <span>Teacher:</span>
+                                        <a href="{% url 'users_profile' item.teacher.user.id %}">
+                                          {{item.teacher.user.first_name}} {{item.teacher.user.last_name}}
+                                        </a>
                                       </div>
 
-                                      <div class="flex justify-center mb-4">
+                                      <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                                        <div>Classmates: 
+                                          <a href="{% url 'students_in_group' course.group.number %}">
+                                            {{course.group.number}}
+                                          </a>
+                                        </div>
+                                      </div>
+
+                                      <div class="flex justify-center">
                                         <a href="{% url 'course_detail' item.id %}" class="flex w-52 btn btn-primary">
                                           Go to Course Page
                                         </a>
                                       </div>
-                                    {% endif %}
+                                </div>
+                                {% endif %}
                               {% endfor %}
                             </div>
                           </div>
@@ -63,17 +83,24 @@
                           <div class="py-10 px-8">
                             <h3 class="text-2xl font-bold flex justify-center mb-3">{{course.course.name}}</h3>
                             <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
-                              <p>Teacher: {{course.teacher.user.first_name}} {{course.teacher.user.last_name}}</p>
+                              <div>Teacher: 
+                                <a href="{% url 'users_profile' course.teacher.user.id %}">
+                                  {{course.teacher.user.first_name}} {{course.teacher.user.last_name}}
+                                </a>
+                              </div>
                             </div>
-
+                            <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                              <div>Group: 
+                                <a href="{% url 'students_in_group' course.group.number %}">
+                                  {{course.group.number}}
+                                </a>
+                              </div>
+                            </div>
+                            
                             <div class="flex justify-center">
-                              {% for item in items  %}
-                                    {% if item.course.name == course.course.name and course.teacher.user.id == item.teacher.user.id %}
-                                      <a href="{% url 'course_detail' item.id %}" class="flex items-center btn btn-primary">
-                                        Go to Course Page
-                                      </a>
-                                    {% endif %}
-                              {% endfor %}
+                              <a href="{% url 'course_detail' course.id  %}" class="flex items-center btn btn-primary">
+                                  Go to Course Page
+                              </a>
                             </div>
                           </div>
                         </div>

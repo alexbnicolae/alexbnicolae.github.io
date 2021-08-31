@@ -8,49 +8,109 @@
                 <div class="flex flex-col">
                     <div class="flex justify-center mb-5">  
                         <div class="py-3 rounded-lg bg-gray-200 w-1/2" style="border: 1px solid black" >
-                            <h1 class="flex justify-center text-4xl mb-4 font-semibold font-heading font-semibold">{{post.course.name}}</h1>
+                            <h1 class="flex justify-center text-4xl mb-4 font-semibold font-heading font-semibold">{{course_id.course.name}}</h1> 
                             <p class="flex justify-center m-0">
                                 <span>Teacher: </span>
-                                <a class="ml-1 text-indigo-600 hover:underline" href="{% url 'users_profile' post.teacher.user.id%}">{{post.teacher.user.first_name}} {{post.teacher.user.last_name}}</a>
+                                 <a class="ml-1 text-indigo-600 hover:underline" href="{% url 'users_profile' course_id.teacher.user.id%}">{{course_id.teacher.user.first_name}} {{course_id.teacher.user.last_name}}</a> 
                             </p>
                         </div>
-                    </div>
+                    </div>    
+                    {% for post in page.object_list %}
+                        {% if post.teacher == course_id.teacher and post.group.number == course_id.group.number %}
+                            <div  class="flex justify-center mb-4">
+                                <div class=" w-1/2 px-5 py-3 rounded-lg bg-gray-200" style="border: 1px solid black">
+                                    <div class="flex justify-center mb-4 text-justify whitespace-pre-line">{{post.text}}</div>
+                                    <a href="/media/{{post.file}}" class="flex justify-center mb-4 text-justify">{{post.file}}</a>        
+                                    {% if user.is_teacher == True and course_id.teacher.user.id == user.id or user.is_admin == True %}
+                                        <div class="flex justify-center text-justify">
+                                            <span class="mr-2">
+                                                <a href="{% url 'form_course' post.id %}">
+                                                        <span class="text-xl">
+                                                            Edit information
+                                                        </span>
+                                                </a>
+                                            </span>
 
-                    <div  class="flex justify-center">
-                        <div class=" w-1/2 px-5 py-3 rounded-lg bg-gray-200" style="border: 1px solid black">
-                                <p class="flex justify-center mb-4 text-justify whitespace-pre-line"> 
-                                    {{post.text}}
-                                <p>
-                        </div>
-                    </div>
+                                            <span class="">
+                                                <a href="{% url 'delete_post' post.id %}">
+                                                        <span class="text-xl">
+                                                            Delete information
+                                                        </span>
+                                                </a>
+                                            </span>
+
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </article>
         {% endif %}
 
-
         <div class="flex justify-center my-5">
             <div>
-                {% if user.is_teacher == True and post.teacher.user.id == user.id or user.is_admin == True %}
-                    <a href="{% url 'form_course' post.id %}">
+
+                {% if user.is_teacher == True and course_id.teacher.user.id == user.id or user.is_admin == True %}
+                    <a href="{% url 'add_post' course_id.id %}">
                         <button class="primaryAction btn btn-success w-96 h-14" type="submit">
                             <span class="text-3xl">
-                                Edit information
+                                Add information
                             </span>
                         </button>
                     </a>
-                {% endif %}
 
-                <a href="{% url 'student_courses' %}" >
+                    <a href="{% url 'student_courses' %}" >
                         <button class="primaryAction btn btn-secondary w-96 h-14" type="submit">
                             <span class="text-3xl">
                                 Go back!
                             </span>
                         </button>
-                </a>
+                    </a>
+                {% endif %}
             </div>
         </div>
 
+        <div class="flex justify-center" >
+            <div class="flex rounded-lg p-2 mb-4">
+            <span class="flex">
+                {% if page.has_previous %}
+                    <span class="m-1 rounded-lg" >
+                        <a  class="" href="{% url 'course_detail' course_id.id %}?page=1">
+                        <button type="button" class="btn btn-warning" style="border: 1px solid black">&laquo; first</button>
+                        </a>
+                    </span>
+                    <span class="m-1 mb-2 rounded-lg bg-gray-200" >
+                        <a  class="" href="{% url 'course_detail' course_id.id %}?page={{ page.previous_page_number }}">
+                        <button type="button" class="btn btn-warning" style="border: 1px solid black">previous</button>
+                        </a>
+                    </span>
+                {% endif %}
+            </span>
 
-    </div>
+            <span class=" flex mt-1">
+                <span class="mx-2 align-middle text-black "> 
+                <button type="button" class="btn btn-info" style="border: 1px solid black">Page {{ page.number }} of {{ page.paginator.num_pages }}</button>
+                </span>
+            </span>
+
+            <span class="flex ">
+                {% if page.has_next %}
+                    <span class="m-1 rounded-lg" >
+                        <a  class="" href="{% url 'course_detail' course_id.id %}?page={{ page.next_page_number }}">
+                        <button type="button" class="btn btn-warning" style="border: 1px solid black">next</button>
+                        </a>
+                    </span>
+                    <span class="m-1 rounded-lg" >
+                        <a  class="" href="{% url 'course_detail' course_id.id %}?page={{ page.paginator.num_pages }}">
+                        <button type="button" class="btn btn-warning" style="border: 1px solid black">last &raquo;</button>
+                        </a>
+                    </span>
+                {% endif %}
+            </span>
+            </div>
+        </div> 
         
 {% endblock content%}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
+from django.db.models.fields.files import FileField
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
@@ -134,26 +135,34 @@ class Attendance(models.Model):
     def __str__(self):
         return self.student.user.username + '-' + self.course.name + '-' + self.group.number
 
-class Class(models.Model):
+class Post(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="teacher2")
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course2")
     group = models.ForeignKey(Groups, on_delete=CASCADE, related_name="group2")
-    text = models.TextField()
-
-    class Meta:
-        unique_together=[['teacher', 'course', 'group']]
+    text = models.TextField(null=True, blank=True)
+    file = models.FileField(null=True, blank=True)
 
     def __str__(self):
-        return self.teacher.user.username    + '-' + self.course.name + '-' + self.group.number
-
-class Teaching(models.Model):
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="teacher")
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course")
+        return self.teacher.user.username    + '-' + self.course.name + '-' + self.group.number + '-' + str(self.id)
+class TeacherCourse(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="teacher0")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course0")
     class Meta:
         unique_together=[['teacher', 'course']]
 
     def __str__(self):
-        return self.teacher.user.username + '-' + self.course.name
+        return self.teacher.user.username + '-' + self.course.name 
+
+class Teaching(models.Model):
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name="teacher")
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course")
+    group = models.ForeignKey(Groups, on_delete=CASCADE, related_name="group5")
+    class Meta:
+        unique_together=[['teacher', 'course', 'group']]
+
+    def __str__(self):
+        return self.teacher.user.username + '-' + self.course.name + '-' + str(self.group)
+
 
 @receiver(post_save, sender=User)
 def create_student_profile(sender, instance, created, **kwargs):

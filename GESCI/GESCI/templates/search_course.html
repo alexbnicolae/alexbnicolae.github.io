@@ -1,0 +1,170 @@
+{% extends 'homepage.html' %}
+
+{% block title %} Search Course {% endblock title %}
+
+{% block content %}
+<div class="mt-20">
+    {% if request.user.is_authenticated == True %}
+        {% if searched %}
+            <div class="flex justify-center mb-10">
+              <h1 class="flex justify-center underline w-1/4 text-4xl mb-2 font-semibold font-heading font-semibold py-3 rounded-lg bg-blue-200" style="border: 1px solid black">You Searched For: <span class="text-red-600 ml-2">{{searched}}</span></h1>
+            </div>
+            {% for course in page.object_list %}
+                {% if course.student.user.username == user.username %}
+                  <div class="flex justify-center mb-10">
+                    <div>
+                      <div class="rounded-lg overflow-hidden w-96" style="border: 1px solid black">
+                        <div class="relative overflow-hidden pb-60">
+                          <img
+                            class="absolute h-full w-full object-cover object-center"
+                            src="https://collect.criggzdesign.com/wp-content/uploads/2020/07/5c77d8a62417e4405611bb42_3k-color-1-scaled.jpg"
+                            alt=""
+                          />
+                        </div>
+
+                        <div class="relative bg-blue-200">
+                          <div class="py-10 px-8">
+                            <h3 class="text-2xl font-bold flex justify-center mb-3">{{course.course.name}}</h3>
+                            <div class="flex flex-col justify-center">
+                            {% for item in items  %}
+                              {% if course.course == item.course and course.group == item.group %}
+                                <div class="text-gray-600 text-sm font-medium mb-2 justify-center">
+                                      <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                                        <span>Teacher:</span>
+                                        <a href="{% url 'users_profile' item.teacher.user.id %}">
+                                          {{item.teacher.user.first_name}} {{item.teacher.user.last_name}}
+                                        </a>
+                                      </div>
+
+                                      <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                                        <div>Classmates: 
+                                          <a href="{% url 'students_in_group' course.group.number %}">
+                                            {{course.group.number}}
+                                          </a>
+                                        </div>
+                                      </div>
+
+                                      <div class="flex justify-center">
+                                        <a href="{% url 'course_detail' item.id %}" class="flex w-52 btn btn-primary">
+                                          Go to Course Page
+                                        </a>
+                                      </div>
+                                </div>
+                                {% endif %}
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+                {% elif course.teacher.user.username == user.username or user.is_admin == True %}
+                  <div class="flex justify-center mb-20">
+                    <div>
+                      <div class="rounded-lg overflow-hidden w-96" style="border: 1px solid black;">
+                        <div class="relative overflow-hidden pb-60">
+                          <img
+                            class="absolute h-full w-full object-cover object-center"
+                            src="https://collect.criggzdesign.com/wp-content/uploads/2020/07/5c77d8a62417e4405611bb42_3k-color-1-scaled.jpg"
+                            alt=""
+                          />
+                        </div>
+
+                        <div class="relative bg-blue-200">
+                          <div class="py-10 px-8">
+                            <h3 class="text-2xl font-bold flex justify-center mb-3">{{course.course.name}}</h3>
+                            <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                              <div>Teacher: 
+                                <a href="{% url 'users_profile' course.teacher.user.id %}">
+                                  {{course.teacher.user.first_name}} {{course.teacher.user.last_name}}
+                                </a>
+                              </div>
+                            </div>
+                            <div class="text-gray-600 text-sm font-medium flex mb-2 flex justify-center">
+                              <div>Group: 
+                                <a href="{% url 'students_in_group' course.group.number %}">
+                                  {{course.group.number}}
+                                </a>
+                              </div>
+                            </div>
+                            
+                            <div class="flex justify-center">
+                              <a href="{% url 'course_detail' course.id  %}" class="flex items-center btn btn-primary">
+                                  Go to Course Page
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>              
+                {% endif %}
+            {% endfor %}
+
+            <div class="flex justify-center mb-10">
+                <a href="{% url 'student_courses' %}" >
+                    <button class="primaryAction btn btn-secondary w-96 h-14" type="submit">
+                        <span class="text-3xl">
+                            Go back!
+                        </span>
+                    </button>
+                </a>
+            </div> 
+
+            <div class="flex justify-center" >
+              <div class="flex rounded-lg p-2 mb-4">
+                <span class="flex">
+                    {% if page.has_previous %}
+                        <span class="m-1 rounded-lg" >
+                            <a  class="" href="{% url 'search_course' searched %}?page=1">
+                            <button type="button" class="btn btn-warning" style="border: 1px solid black">&laquo; first</button>
+                            </a>
+                        </span>
+                        <span class="m-1 mb-2 rounded-lg bg-gray-200" >
+                            <a  class="" href="{% url 'search_course' searched  %}?page={{ page.previous_page_number }}">
+                            <button type="button" class="btn btn-warning" style="border: 1px solid black">previous</button>
+                            </a>
+                        </span>
+                    {% endif %}
+                </span>
+
+                <span class=" flex mt-1">
+                    <span class="mx-2 align-middle text-black "> 
+                    <button type="button" class="btn btn-info" style="border: 1px solid black">Page {{ page.number }} of {{ page.paginator.num_pages }}</button>
+                    </span>
+                </span>
+
+                <span class="flex ">
+                    {% if page.has_next %}
+                        <span class="m-1 rounded-lg" >
+                            <a  class="" href="{% url 'search_course' searched %}?page={{ page.next_page_number }}">
+                            <button type="button" class="btn btn-warning" style="border: 1px solid black">next</button>
+                            </a>
+                        </span>
+                        <span class="m-1 rounded-lg" >
+                            <a  class="" href="{% url 'search_course' searched %}?page={{ page.paginator.num_pages }}">
+                            <button type="button" class="btn btn-warning" style="border: 1px solid black">last &raquo;</button>
+                            </a>
+                        </span>
+                    {% endif %}
+                </span>
+              </div>
+            </div>   
+
+        {% else %}
+            <div class="flex  justify-center mb-10">
+                <h1 >You forgot to search a course!</h1>
+            </div>
+            <div class="flex justify-center mb-10">
+                <a href="{% url 'student_courses' %}" >
+                    <button class="primaryAction btn btn-secondary w-96 h-14" type="submit">
+                        <span class="text-3xl">
+                            Go back!
+                        </span>
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock content %}

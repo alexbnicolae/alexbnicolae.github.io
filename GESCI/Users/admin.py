@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Student, User, Teacher, Course, Attendance, Teaching, Class, Groups, StudentGroup
+from .models import Student, User, Teacher, Course, Attendance, Teaching, Groups, StudentGroup, Post, TeacherCourse
 from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
@@ -108,20 +108,22 @@ class TeachingAdmin(admin.ModelAdmin):
 
 admin.site.register(Teaching, TeachingAdmin)
 
-class ClassAdmin(admin.ModelAdmin):
-    pass
-
-admin.site.register(Class, ClassAdmin)
 
 class GroupsAdmin(admin.ModelAdmin):
     pass
-
 admin.site.register(Groups, GroupsAdmin)
 
 class StudentGroupsAdmin(admin.ModelAdmin):
     pass
-
 admin.site.register(StudentGroup, StudentGroupsAdmin)
+
+class PostsAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Post, PostsAdmin)
+
+class TeacherCoursesAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(TeacherCourse, TeacherCoursesAdmin)
 
 
 

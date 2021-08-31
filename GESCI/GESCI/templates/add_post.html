@@ -1,0 +1,67 @@
+{% extends 'homepage.html' %}
+
+{% block title %} Add Info {% endblock title %}
+
+{% block content %}
+    {% if request.user.is_authenticated == True %}
+    <div class="mt-20">
+        {% if user.is_teacher %}
+            <div class="flex justify-center" >    
+                <div class="rounded-lg w-96 h-full p-10 bg-green-300 shadow-xl" style="border: 1px solid black">
+                    <form enctype="multipart/form-data" method="POST" action="">
+                        {% csrf_token %}
+                        <p>
+                            <label for="form.teacher" >Teacher:</label> 
+                            <select  required="" id="form.teacher">
+                                {% for f in form.teacher.field.choices %}
+                                    {% if f.1 == course_id.teacher.user.username %}
+                                        <option value="{{f.0}}" >{{f.1}}</option> 
+                                    {% endif %}
+                                {% endfor %}
+                            </select> 
+                        </p> 
+                        
+                        <p>
+                            <label for="form.course">Course:</label> 
+                            <select name="{{form.course.name}}" required="" id="form.course">
+                                {% for f in form.course.field.choices %}
+                                    {% if f.1 == course_id.course.name %}
+                                        <option value="{{f.0}}" >{{f.1}}</option> 
+                                    {% endif %}
+                                {% endfor %}
+                            </select> 
+                        </p>
+
+                        <p>
+                            <label for="form.group">Group:</label>
+                            <select name="{{form.group.name}}" required="" id="form.group">
+                                {% for f in form.group.field.choices %}
+                                    {% if f.1 == course_id.group.number %}
+                                        <option value="{{f.0}}" >{{f.1}}</option> 
+                                    {% endif %}
+                                {% endfor %}
+                            </select> 
+                        </p>
+
+                        <p>
+                            <label for="">Text:</label> 
+                            {{form.text}}
+                        </p>
+
+                        <p>
+                            <label for="">File:</label> 
+                            {{form.file}}
+                        </p> 
+
+                        <button type="sumbit" class="btn btn-lg btn-success w-80 h-14"> 
+                            <span class="text-3xl">
+                                Post
+                            </span>
+                        </button> 
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'homepage.html' %}
+
+{% block title %} Courses {% endblock title %}
+
+{% block content %}
+
+<div class="mt-20">
+    <div class="border-b border-grey-light p-4 bg-grey-lighter py-8">
+      <div class="bg-white mx-auto max-w-sm shadow-lg rounded-lg overflow-hidden">
+        <div class="sm:flex sm:items-center px-2 py-4">
+          <div class="flex-grow">
+            <h3 class="font-normal px-2 py-3 leading-tight">Group: {{group.number}}</h3>
+            <div class="w-full">
+            {% for sg in studentGroup %}
+                {% if sg.group == group %}  
+                    <div class="flex cursor-pointer my-1 hover:bg-blue-lightest rounded">
+                        <div class="w-8 h-10 text-center py-1">
+                            <p class="text-3xl p-0 text-green-dark">&bull;</p>
+                        </div>
+                        <div class="w-4/5 h-10 py-3 px-1">
+                            <a class="ml-1 text-indigo-600 hover:underline" href="{% url 'users_profile' sg.student.user.id%}">
+                                {{sg.student.user.first_name}} {{sg.student.user.last_name}}
+                            </a> 
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock content %}

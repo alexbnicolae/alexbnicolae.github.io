@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import PasswordChangeForm, UserChangeForm
-from .models import User, Class
+from .models import User, Post
 
 class EditProfileForm(UserChangeForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}))
@@ -24,6 +24,11 @@ class PasswordChangingForm(PasswordChangeForm):
 class ClassForm(forms.ModelForm):
     text =  forms.CharField(widget=forms.Textarea(attrs={'style':'border:2px solid black','class':'form-control',"rows":20, "cols":50}))
     class Meta:
-        model = Class
-        fields = ('text',)
+        model = Post
+        fields = ('text', 'file')
+
+class AddPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('teacher', 'course', 'group', 'text', 'file',)
 
