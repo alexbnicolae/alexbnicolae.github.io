@@ -21,6 +21,6 @@ feed/models.py - fisierul in care am creat tabelele
 feed/views.py - fisierul in care am creat functionalitatile de pe site
 feed/admin.py - fisierul de inregistrare a tabelelor in baza de date
 - Pentru conectarea ca superuser trebuie creat acesta cu comanda python manage.py createsuperuser.
-- Pentru logarea ca super user trebuie mers la pagina http://localhost:8000/admin
+- Pentru logarea ca superuser trebuie mers la pagina http://localhost:8000/admin
 - Cand se modifica ceva in models.py trebuie create noi migrari folosind comanda: python manage.py makemigrations.
 - Pentru a aplica noile migrari trebuie folosita comanda: python manage.py migrate
