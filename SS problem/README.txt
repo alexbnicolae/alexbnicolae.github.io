@@ -1,3 +1,5 @@
+Proiectul este creat in Python si Django.
+
 Pornire site:
 - descarcare proiect github: https://github.com/alexbnicolae/alexbnicolae.github.io/tree/main/SS%20problem
 - deschidere proiect intr-un IDE
