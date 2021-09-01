@@ -1,3 +1,10 @@
+Update:
+- Am facut sa functioneze chat-ul, dupa trimiterea mesajului pagina isi da refresh automat.
+- Acum merge si trimiterea unui fisier de orice tip.
+- Am redenumit titlurile paginilor in functie de pagina respectiva.
+- Am reordonat pagina de Search user.
+
+
 Proiectul este creat in Python si Django.
 
 Pornire site:
