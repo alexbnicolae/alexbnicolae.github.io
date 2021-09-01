@@ -52,28 +52,28 @@ $(document).on("click", ".js-add-friend", function(e){
         }
     });
 })
-$(document).on("click", ".js-submit", function(e){
-    e.preventDefault();
-    console.log("Submit me?")
-    const text = $(".js-new-message").val().trim()
+// $(document).on("click", ".js-submit", function(e){
+//     e.preventDefault();
+//     console.log("Submit me?")
+//     const text = $(".js-new-message").val().trim()
 
-    if(!text.length)
-    {
-        return false
-    }
+//     if(!text.length)
+//     {
+//         return false
+//     }
 
-    $.ajax({
-        type: "POST",
-        url: $(".js-new-message").data("new-message-url"),
-        data: {
-            text: text,
-        },
-        success:(dataHtml) =>{
-            $(".js-new-message").val('')
-        },
+//     $.ajax({
+//         type: "POST",
+//         url: $(".js-new-message").data("new-message-url"),
+//         data: {
+//             text: text,
+//         },
+//         success:(dataHtml) =>{
+//             $(".js-new-message").val('')
+//         },
 
-        error: (error) => {
-            console.log(error)
-        }
-    });
-})
+//         error: (error) => {
+//             console.log(error)
+//         }
+//     });
+// })

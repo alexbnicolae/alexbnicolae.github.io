@@ -60,9 +60,20 @@ def chat_messages(request, pk):
     my_chat_friend = my_chat_friend.order_by("-date")
 
     if request.method == "POST":
-        new_message = Chat.objects.create(friendship = room_chat.friendship1, sender = request.user,text = request.POST.get("text"))
-        
+        form = AddPostForm(request.POST or None, request.FILES or None)
+        try:
+            if form.is_valid():
+                form.save()
+                # messages.add_message(request, messages.SUCCESS, "Info Added!")
+                return redirect('/chat/'+ str(pk))
+        except Exception as e:
+                # messages.Warning(request, "Your post was not saved due to an error {}".format(e))
+                pass
+    else:
+        form = AddPostForm()
+
     context = {
+        'form': form,
         'room_chat': room_chat,
         'my_chat_friend': my_chat_friend, 
     }

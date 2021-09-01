@@ -2,10 +2,10 @@
 
 {% load bool %}
 
-{% block title %}{% endblock title %}
+{% block title %}Search User{% endblock title %}
 
 {% block content %}
-
+<div style="width:100%;">
 {% if request.user.is_authenticated %}
     <div class="justify-center flex">
         <h1 class="text-3xl font-extrabold m-2 underline">My search results:</h1>
@@ -38,4 +38,5 @@
         {% endif %}
     {% endfor %}
 {% endif %}
+</div>
 {% endblock content %}
