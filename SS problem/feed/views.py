@@ -80,13 +80,20 @@ def chat_messages(request, pk):
     return render(request, template, context)
 
 def get_message (request, pk):
-    template = "chat_messages.html"
-    friend_chat = FriendList.objects.get(id = pk)
-    
-    context = {
-        
-    }
-    return render(request, template, context, content_type="application/html")
+    room_chat = Room.objects.get(id = pk)
+
+    my_chat_friend1 = Chat.objects.filter(friendship = room_chat.friendship1)
+    my_chat_friend2 = Chat.objects.filter(friendship = room_chat.friendship2)
+
+    my_chat_friend = my_chat_friend1|my_chat_friend2
+    my_chat_friend = my_chat_friend.order_by("-date")
+    user = request.user.id
+
+    return JsonResponse({
+        "messages": list(my_chat_friend.values()),
+        "user": user,
+        "pk": pk,
+    })
 
 def see_profile(request, pk):
     try:

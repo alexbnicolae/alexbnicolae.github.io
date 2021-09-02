@@ -28,7 +28,7 @@ urlpatterns = [
     # path("search_user/<str:username>", change_text, name="change_text"),
     # path('home/', Home.as_view(), name="home"),
     path('chat/<int:pk>', chat_messages, name = "chat_messages"),
-    path('get_message/<int:pk>', get_message, name = "get_message"),
+    path('chat/<int:pk>/data', get_message, name = "get_message"),
     path('see_profile/<int:pk>', see_profile, name = "see_profile"),
     path('accounts/', include('allauth.urls')),
     url('', include("allauth.urls")),
