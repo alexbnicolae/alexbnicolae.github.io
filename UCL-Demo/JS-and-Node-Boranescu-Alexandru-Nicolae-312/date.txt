@@ -1,2 +1,0 @@
-Andrei,20,Bucuresti
-Maria,11,Cluj
