@@ -17,10 +17,10 @@
     <br/>
     <div class="flex justify-center" >    
         <div class="rounded-lg w-96 h-96 p-12 bg-red-100 shadow-xl" style="border: 1px solid black">
-            <a title="Google" class="text-2xl  text-black socialaccount_provider google" href="/google/login/?process=login">Login with Google</a>
+            {% comment %} <a title="Google" class="text-2xl  text-black socialaccount_provider google" href="/google/login/?process=login">Login with Google</a>
             <div class="my-2">
               or
-            </div>
+            </div> {% endcomment %}
             <form class="login " method="POST" action="{% url 'account_login' %}" >
                 {% csrf_token %}
                 <p>

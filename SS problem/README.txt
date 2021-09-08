@@ -19,7 +19,7 @@ superuserul cu datele cerute.
 
 
 Functionalitati site:
-- Se poate loga cu Google(recomandat) sau se poate crea cont, dar cand am urcat pe github, am dezactivat trimiterea mail-ului din fisierul settings.py
+- Creare cont: deoarece am dezactivat email-ul de confirmare, dupa creare cont in Sign-up, o sa apara o eroare: SMTPAuthenticationError at /signup/, dar contul se creeaza si dupa se poate conecat cu email-ul si parola.
 - In bara de search se cauta utilizatorii dupa username, nume sau prenume (nu merg 2 cuvinte sau mai mult)
 - O data cautata persoana se poate aduaga la friends
 - Pentru a aparea in lista de prieteni trebuie ca cealalta persoana va adauge la prieteni

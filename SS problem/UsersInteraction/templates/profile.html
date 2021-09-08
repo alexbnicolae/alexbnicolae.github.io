@@ -1,6 +1,6 @@
 {% extends 'home.html' %}
 
-{% block title %}Profile: {{profile.first_name}} {{profile.last_name}}{% endblock title %}
+{% block title %}Profile: {{profile.first_name}} {{profile.last_name}} - {{profile.username}}{% endblock title %}
 
 {% block content %}
 
@@ -13,7 +13,7 @@
         <div class="space-y-10 ">
             <div class="flex items-center p-6 space-x-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition duration-500" style="border: 1px solid black">
             <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
-                {{profile.first_name}} {{profile.last_name}}
+                {{profile.first_name}} {{profile.last_name}} - {{profile.username}}
             </div>
                 
             <button type="submit " class="py-3 px-6 text-white rounded-lg bg-green-500 shadow-lg js-add-friend" style="border: 1px solid black"
