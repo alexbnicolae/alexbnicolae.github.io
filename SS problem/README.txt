@@ -12,10 +12,11 @@ Pornire site:
 - deschidere proiect intr-un IDE
 - trebuie instalat pip: https://phoenixnap.com/kb/install-pip-windows
 - pentru a instala librarile din proiect: pip install -r requirements.txt
-- pornire server prin comanda: python manage.py runserver 0.0.0.0:8000
-- deschidere site la adresa: http://localhost:8000
 - pentru crearea de superuser (pentru a intra in baza de date la http://localhost:8000/admin) trebuie folosita comanda  python manage.py createsuperuser si apoi de completat 
 superuserul cu datele cerute.
+- pornire server prin comanda: python manage.py runserver 0.0.0.0:8000
+- deschidere site la adresa: http://localhost:8000
+
 
 Functionalitati site:
 - Se poate loga cu Google(recomandat) sau se poate crea cont, dar cand am urcat pe github, am dezactivat trimiterea mail-ului din fisierul settings.py
