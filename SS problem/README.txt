@@ -10,6 +10,7 @@ Proiectul este creat in Python si Django.
 Pornire site:
 - descarcare proiect github: https://github.com/alexbnicolae/alexbnicolae.github.io/tree/main/SS%20problem
 - deschidere proiect intr-un IDE
+- trebuie instalat pip: https://phoenixnap.com/kb/install-pip-windows
 - pentru a instala librarile din proiect: pip install -r requirements.txt
 - pornire server prin comanda: python manage.py runserver 0.0.0.0:8000
 - deschidere site la adresa: http://localhost:8000
