@@ -1,0 +1,43 @@
+{% extends 'nav.html' %}
+
+{% block title %}Edit contact{% endblock %}
+
+{% block content %}
+<div class="mt-8 flex justify-center ">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Edit Contact</div>
+</div>
+<div class="flex justify-center">
+    <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max">
+        <form method = "POST" action ="">
+            {% csrf_token %}
+             <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_first_name">First name:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 fn-edit" type="text" name="first_name" value="{{contact.first_name}}" maxlength="30" required id="id_first_name">
+            </p>
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_last_name">Last name:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 ln-edit" type="text" name="last_name" value="{{contact.last_name}}" maxlength="30" required id="id_last_name">
+            </p>
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_email">Email:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-lg font-medium border-2 border-solid border-gray-400 email-edit" type="email" name="email" value="{{contact.email}}" maxlength="100" required id="id_email">
+            </p>
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_phoneNumber">Phone Number:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 pn-edit" type="text" name="phoneNumber" value="{{contact.phoneNumber}}" maxlength="10" required id="id_phoneNumber">
+            </p>
+
+            <p class="flex justify-center">
+                <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400 js-edit" type="submit" data-url="{% url 'contactBook_detail' contact.id %}">Submit</button>
+            </p> 
+            
+            <p class="w-max text-xl mt-4 text-red-500 errors-edit">
+            
+            </p>
+
+
+        </form>
+    
+    </div>
+</div>
+{% endblock  %}

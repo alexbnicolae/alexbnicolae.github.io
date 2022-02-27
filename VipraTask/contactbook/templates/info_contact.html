@@ -1,0 +1,33 @@
+{% extends 'nav.html' %}
+
+{% block title %}Info contact{% endblock %}
+
+{% block content %}
+<div class="mt-8 flex justify-center ">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Info Contact</div>
+</div>
+<div class="flex justify-center">
+    <div class="inline-block p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg text-xl">
+        <div class="flex flex-col items-center p-2 ">
+            <span class="text-blue-500 underline">&bull; First name:</span>
+            <span>{{get_contact.first_name}}</span>
+        </div>
+        <div class="flex flex-col items-center p-2">
+            <span class="text-blue-500 underline">&bull; Last name:</span>
+            <span>{{get_contact.last_name}}</span>
+        </div>
+        <div class="flex flex-col items-center p-2 ">
+            <span class="text-blue-500 underline">&bull; Email:</span>
+            <span>{{get_contact.email}}</span>
+        </div>
+        <div class="flex flex-col items-center p-2">
+            <span class="text-blue-500 underline">&bull; Phone Number:</span>
+            <span>{{get_contact.phoneNumber}}</span>
+        </div>
+        <div class="flex justify-evenly p-2">
+            <a href="{% url 'edit_contact' get_contact.id %}" class="border-2 border-solid border-gray-400 rounded-lg p-1 text-black bg-yellow-400 ">Edit</a>
+            <a href="{% url 'contactBook_detail' get_contact.id %}" class="border-2 border-solid border-gray-400 rounded-lg p-1 bg-red-400 js-delete" data-url="{% url 'contactBook_detail' get_contact.id %}">Delete</a>
+        </div>
+    </div>
+</div>
+{% endblock  %}

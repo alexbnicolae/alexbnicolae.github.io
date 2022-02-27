@@ -1,0 +1,31 @@
+"""contactbook URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from unicodedata import name
+from django.contrib import admin
+from django.urls import path
+# from feed.api_views import CreateContactBookApiView
+
+from feed.views import add_contact, contactBook_detail, contactBook_list, edit_contact, home_page, info_contact
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', home_page, name="home_page"),
+    path('add_contact/', add_contact , name="add_contact"),
+    path('info_contact/<int:pk>', info_contact, name="info_contact"),
+    path('edit_contact/<int:pk>', edit_contact, name="edit_contact"),
+    path('contacts/', contactBook_list, name="contactBook_list"),
+    path('contacts/<int:pk>', contactBook_detail, name="contactBook_detail"),
+]
