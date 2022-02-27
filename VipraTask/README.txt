@@ -1,5 +1,6 @@
 Hello there,
 
+This mini-project is made in Python and Django.
 The instructions are:
 
 1. Download the project.
