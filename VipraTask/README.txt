@@ -1,6 +1,6 @@
 Hello there,
 
-The intructions are:
+The instructions are:
 
 1. Download the project.
 2. Open a terminal or open the program in any IDE (I used VSC).
