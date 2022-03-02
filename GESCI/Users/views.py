@@ -145,6 +145,7 @@ def edit_post(request, pk):
 def add_post(request, pk):
     template = "add_post.html"
     course_id  = Teaching.objects.get(id=pk)
+
     if request.method == "POST":
         form = AddPostForm(request.POST or None, request.FILES or None)
         try:
@@ -156,7 +157,8 @@ def add_post(request, pk):
                 messages.Warning(request, "Your post was not saved due to an error {}".format(e))
     else:
         form = AddPostForm()
-    
+
+    print(form.errors)
     context = {
         'form': form,
         'course_id' : course_id,

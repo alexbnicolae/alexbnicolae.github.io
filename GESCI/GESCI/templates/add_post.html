@@ -10,9 +10,10 @@
                 <div class="rounded-lg w-96 h-full p-10 bg-green-300 shadow-xl" style="border: 1px solid black">
                     <form enctype="multipart/form-data" method="POST" action="">
                         {% csrf_token %}
+                        {% comment %} {{form.as_p}} {% endcomment %}
                         <p>
                             <label for="form.teacher" >Teacher:</label> 
-                            <select  required="" id="form.teacher">
+                            <select name={{form.teacher.name}}  required="" id="form.teacher">
                                 {% for f in form.teacher.field.choices %}
                                     {% if f.1 == course_id.teacher.user.username %}
                                         <option value="{{f.0}}" >{{f.1}}</option> 
@@ -51,7 +52,7 @@
                         <p>
                             <label for="">File:</label> 
                             {{form.file}}
-                        </p> 
+                        </p>  
 
                         <button type="sumbit" class="btn btn-lg btn-success w-80 h-14"> 
                             <span class="text-3xl">
@@ -59,6 +60,10 @@
                             </span>
                         </button> 
                     </form>
+
+                    {% if form.errors %}
+                        {{form.errors}}
+                    {% endif %}
                 </div>
             </div>
         {% endif %}
