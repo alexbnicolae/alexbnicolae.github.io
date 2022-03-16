@@ -24,9 +24,10 @@ PROJ_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g&4xl^x+(^v1&cw)xqnn0e_0zyqk7)z2u%@2&h6=fx65mg%hs_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['testserver', "localhost", "*"]
+ALLOWED_HOSTS = ['testserver', "localhost", "*", "https://contact-book-task.herokuapp.com"]
+
 
 
 # Application definition
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'feed',
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'contactbook.urls'
@@ -81,12 +84,14 @@ WSGI_APPLICATION = 'contactbook.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd5ke95he3jvqls',
+        'HOST' : 'ec2-34-199-209-37.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'xszpjvohhkaaxd',
+        'PASSWORD': '9b84fb47b09f4b14e64c96b30955187ce9fff15e09b6a2602f0a31c594b05b63',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -123,7 +128,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -133,8 +137,13 @@ REST_FRAMEWORK = {
     ]
 }
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     os.path.join(PROJ_DIR, "frontend/")
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_URL = "/static/"
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://contact-book-task.herokuapp.com'
+]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

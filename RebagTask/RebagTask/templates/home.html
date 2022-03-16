@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="bg-indigo-900 flex justify-between border-b-2 border-gray-800 p-2 font-semibold text-white">
+        <a class="no-underline text-white " href="{% url 'home' %}"><h1 class="text-3xl font-extrabold">Rebag Task</h1></a>
+
+        {% if request.user.is_authenticated %}
+            <a class="text-3xl font-extrabold underline text-gray-300" href="{% url 'logout_view' %}">Log out!</a>
+        {% else %}
+            <div>
+                <a class="text-3xl font-extrabold underline text-gray-300" href="{% url 'login_view' %}">Log in</a>
+                <a class="text-3xl font-extrabold underline text-gray-300" href="{% url 'signup_view' %}">Sign UP</a>
+            </div>
+        {% endif %}
+    </nav>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}> 
+            {% if message.tags == "success" %}
+                <div class="flex font-bold text-xl text-white py-4 justify-center bg-green-500">{{ message }}</div>
+            {% elif message.tags == "info" %}
+                <div class="flex font-bold text-xl text-white py-4 justify-center bg-yellow-500">{{ message }}</div>
+            {% elif message.tags == "warning" %}
+                <div class="flex font-bold text-xl text-white py-4 justify-center bg-red-500">{{ message }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} 
+
+    {% block content %}
+    <div class="mt-8 flex justify-center">
+        <div class="no-underline text-3xl font-extrabold text-black border-2 border-black p-2 rounded-lg bg-gray-400">Users</div>
+    </div>
+
+    <div class="flex flex-wrap p-2 justify-evenly">
+        {% for user in users %}
+                <div class="inline-block p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg">
+                    <div class="flex flex-col items-center p-2 ">
+                        <span class="text-blue-500 underline">&bull; Username:</span>
+                        <span>{{user.username}}</span>
+                    </div>
+        
+                    <div class="flex flex-col items-center p-2 ">
+                        <span class="text-blue-500 underline">&bull; Email:</span>
+                        <span>{{user.email}}</span>
+                    </div>
+                </div>
+        {% endfor %}
+    </div>
+
+    <div class="mt-4 flex justify-center ">
+        <a class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200" href="{% url 'add_client' %}">Add Client</a>
+    </div>
+
+    <div class="mt-8 flex justify-center">
+        <div class="no-underline text-3xl font-extrabold text-black border-2 border-black p-2 rounded-lg bg-gray-400">Clients</div>
+    </div>
+
+    <div class="flex flex-wrap p-2 justify-evenly">
+        {% for client in clients %}
+            <div class="inline-block p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg">
+                <div class="flex flex-col items-center p-2 ">
+                    <span class="text-blue-500 underline">&bull; Username:</span>
+                    <span>{{client.username}}</span>
+                </div>  
+                <div class="flex flex-col items-center p-2 ">
+                    <span class="text-blue-500 underline">&bull; Email:</span>
+                    <span>{{client.email}}</span>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% endblock content %}
+
+    
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+
+
+{% block content %}
+
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Log In</div>
+</div>
+
+<div class="flex justify-center ">
+    <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_username">Username:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="text" name="username" maxlength="150" required="" id="id_username">
+            </p>
+        
+        
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_password">Password:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="password" name="password" maxlength="25" required="" id="id_password">
+            </p>
+
+            <p class="flex justify-center">
+                <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400" type="submit">Login</button>
+            </p>
+        </form>
+    </div> 
+</div> 
+{% endblock content %}

@@ -1,11 +1,10 @@
 Hello there,
 
-This mini-project is made in Python and Django.
-The instructions are:
+The intructions are:
 
 1. Download the project.
 2. Open a terminal or open the program in any IDE (I used VSC).
-3. Install the requirements using this command in terminal: pip install -r requirements.txt (Install pyhton and pip https://phoenixnap.com/kb/install-pip-windows).
+3. Install the requirements using this command in terminal: pip install -r requirements.txt .
 4. Use this command in terminal to launch the app: python manage.py runserver 0.0.0.0:8000 .
 
 Now go to: http://localhost:8000 and you cand Edit, Post, Delete, Get the contacts.
