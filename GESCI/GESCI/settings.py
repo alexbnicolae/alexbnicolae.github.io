@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=ncux0rb!6f#6xk25)(sgy%%k^ri)=09=$-3da%s6wtrlzy4z7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gesci.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'GESCI.urls'
@@ -83,11 +84,14 @@ WSGI_APPLICATION = 'GESCI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dautsoqtvpgh6b',
+        'HOST': 'ec2-54-83-21-198.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'grpuyzsuwkteaa',
+        'PASSWORD': 'eb9d177fa93bba0e9abb344be57b8ac5606dad7f6fa3394e2233be1749e9dd7f',
     }
 }
-
 AUTH_USER_MODEL = "Users.User"
 
 # Password validation
@@ -162,3 +166,9 @@ STATIC_URL = "/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = '/media/'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://gesci.herokuapp.com'
+]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Users.views import HomePage, UserEditView, PasswordChange, Classes, ProfileDetailView, edit_post, course_detail, show_course_detail,  users_profile, add_post, delete_post, students_in_group, search_course 
-from django.conf.urls import include, url 
+from django.conf.urls import include 
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -35,7 +35,7 @@ urlpatterns = [
     path("delete_info/<int:pk>", delete_post, name="delete_post"),
     path("group/<int:gn>", students_in_group, name="students_in_group"),
     path("search_course/<x>", search_course, name="search_course"),
-    url('', include("allauth.urls")),
+    path('', include("allauth.urls")),
 ]
 
 if settings.DEBUG:
