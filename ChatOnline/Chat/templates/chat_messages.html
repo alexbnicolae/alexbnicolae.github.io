@@ -1,0 +1,170 @@
+{% extends 'home.html' %}
+{% load static %}
+    {% block title %} 
+    Chat - 
+    {% if   room_chat.friendship1.user1 == request.user %}
+    {{room_chat.friendship1.user2.first_name}} {{room_chat.friendship1.user2.last_name}} {{room_chat.friendship1.user2.username}}     
+    {% elif room_chat.friendship1.user2 == request.user %}
+    {{room_chat.friendship1.user1.first_name}} {{room_chat.friendship1.user1.last_name}} {{room_chat.friendship1.user1.username}}         
+    {% endif %}
+    {% endblock title %}
+<style>
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+}
+
+.scrollbar-track-blue-lighter::-webkit-scrollbar-track {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+
+.scrollbar-thumb-blue::-webkit-scrollbar-thumb {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
+}
+
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+  border-radius: 0.25rem;
+}
+</style> 
+{% comment %} Credits: https://tailwindcomponents.com/component/chat {% endcomment %}
+{% block content %}
+<div class="flex flex-col clickFocus" style="width: 100%;">
+    <div class="flex  items-center space-x-4 " >
+         <img src="https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011" alt="" class="w-10 sm:w-16 h-10 sm:h-16 rounded-full m-2">
+        <div class="flex flex-col leading-tight">
+            <div class="text-2xl mt-1 flex items-center">
+                {% if   room_chat.friendship1.user1 == request.user %}
+                    <a  class="no-underline text-gray-900" href = "{% url 'see_profile' room_chat.friendship1.user2.id %}" >
+                        <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
+                                {{room_chat.friendship1.user2.first_name}} {{room_chat.friendship1.user2.last_name}} {{room_chat.friendship1.user2.username}}
+                        </div>
+                    </a>
+                {% elif room_chat.friendship1.user2 == request.user %}
+                    <a href = "{% url 'see_profile' room_chat.friendship1.user2.id %}" >
+                        <div class="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg">
+                            {{room_chat.friendship1.user1.first_name}} {{room_chat.friendship1.user1.last_name}} {{room_chat.friendship1.user1.username}}
+                        </div>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+        <form enctype="multipart/form-data" method="POST" action="">
+            {% csrf_token %} 
+            <p style="display: none;">
+                <label for="id_friendship">Friendship:</label> 
+                <select name="friendship" required="" id="id_friendship">
+                    {% for f in form.friendship.field.choices %}
+                        {% if f.0 == room_chat.friendship1.id or f.0 == room_chat.friendship2.id  %}
+                            <option value="{{f.0}}" >{{f.1}}</option> 
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+
+            <p style="display: none;">
+                <label for="id_sender">Sender:</label> 
+                <select name="sender" required="" id="id_sender">
+                    {% for f in form.sender.field.choices %}
+                        {% if f.0 == request.user.id %}
+                            <option value="{{f.0}}" >{{f.1}}</option> 
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </p>
+
+             <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0 ">
+                <div class="relative flex w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-5 bg-gray-200 rounded-full pt-2 " style="height: 80px;">
+                    <p class="mb-5">
+                    <label style="display: none;" for="id_text">Text:</label> 
+                    <textarea 
+                        class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-full py-3 "
+                        style="resize:none; height: 60px;"
+                        placeholder="Write Something"
+                        name="text" 
+                        cols="160" 
+                        required="" 
+                        id="id_text"></textarea>
+                    </p>
+                    
+                    <div class="absolute right-0 items-center inset-y-0 hidden sm:flex">
+                         <p>
+                            <label style="display: none;" for="id_file">File:</label> 
+                            <input type="file" name="file" id="id_file">
+                        </p> 
+
+                        <button type="submit" class="js-submit inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none ">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-6 w-6 transform rotate-90">
+                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div> 
+        </form>
+    <div class=" p:2 flex flex-col h-screen overflow-y-auto">
+        <div id="posts" data-url="{% url 'get_message' room_chat.id %}" class="getEveything">
+            
+            {% for mes in my_chat_friend %}
+                {% comment %} <div data-focus="focused"> 
+                    {{mes.text}}
+                </div> {% endcomment %}
+                {% if mes.sender_id == request.user.id %}
+                    <div id='messages' class='myPost flex flex-col space-y-4 p-3 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch'>
+                        <div class='chat-message'>
+                            <div class='flex items-end'>
+                                <div class='flex flex-col  text-xs  mx-2 order-2 items-start'>
+                                    <div>
+                                        <span class=' px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600'>
+                                            {{mes.text}}
+                                            {% if mes.file %}
+                                            <a href='/media/" + {{mes.file}} + "'>
+                                                <div>
+                                                    {{mes.file}}
+                                                </div
+                                            ></a>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                                    <img src='https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011' alt='My profile' class='w-6 h-6 rounded-full order-1'>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div id='messages' data-focus='focused' class=' friendPost noFocus flex flex-col space-y-4 p-3 scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch justify-end'>
+                        <div class='chat-message'>
+                            <div class='flex justify-end'
+                            ><div class='flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 justify-items-end'>
+                                <div>
+                                    <span class='px-4 py-2 rounded-lg inline-block rounded-br-none bg-blue-600 text-white '>
+                                        {{mes.text}}
+                                        {% if mes.file %}
+                                            <a href='/media/" + {{mes.file}} +"'class='text-white' >
+                                                <div>
+                                                    {{mes.file}}
+                                                </div
+                                            ></a>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                </div>
+                                    <img src='https://static.wikia.nocookie.net/caramella-girls/images/9/99/Blankpfp.png/revision/latest?cb=20190122015011' alt='My profile' class='w-6 h-6 rounded-full order-2'>
+                                </div>
+                            </div>
+                        </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+<script>
+
+</script> 
