@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+
+{% block title %}My Gift Cards{% endblock title %}
+
+{% block body %}
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">My Gift Cards</div>
+</div>
+<div class="displayCards" data-url="{% url 'card_list'%}" data-token="{{token}}">
+    <div id="displayCards" class="flex flex-wrap p-2 justify-evenly" >
+        
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,58 @@
+{% extends 'home.html' %}
+
+{% block title %}Add Order{% endblock title %}
+{% block body %}
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Add Order</div>
+</div>
+{% if giftCard.giftCard.available %}
+<div class="flex justify-center order" data-token="{{token}}">
+    <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+        <form action="" method="POST" >
+            {% csrf_token %}
+            <p class="hidden">
+                <label for="id_giftCard">GiftCard:</label>
+                    <select name="giftCard" required="" id="id_giftCard">
+                        {% for f in form.giftCard.field.choices %}
+                            {% if f.0 == giftCard.id %}
+                                <option class="gc-add" value="{{f.0}}" >{{f.1}}</option> 
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+            </p>
+
+        
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_productOrdered">ProductOrdered:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 po-add" type="text" name="productOrdered" maxlength="200" required="" id="id_productOrdered" value="{{ form.productOrdered.value|default_if_none:''}}">
+            </p>
+
+            
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_amount">Amount:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 a-add" type="number" name="amount" step="0.01" required="" id="id_amount" value="{{ form.amount.value|default_if_none:''}}">
+            </p>
+
+            
+            <p  class="flex flex-col my-4 hidden">
+                <label class="text-xl" for="id_date">Date:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 d-add" type="text" name="date" required="" id="id_date">
+            </p>
+
+            
+            <p class="flex flex-col my-4 hidden">
+                <label class="text-xl" for="id_orderNumber">OrderNumber:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 on-add" type="text" name="orderNumber" value="" maxlength="200" required="" id="id_orderNumber">
+            </p>
+            <p class="flex justify-center">
+                <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400 js-submit" type="submit" data-url="{% url 'order_list' %}">Submit</button>
+            </p>
+
+            <p class="w-max text-xl mt-4 text-red-500 errors-add-order">
+            
+            </p>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

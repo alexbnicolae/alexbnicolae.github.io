@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+
+{% block title %}Add a Gift Card{% endblock title %}
+{% block body %}
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Add a Gift Card</div>
+</div>
+{% if request.user.is_staff %}
+    <div class="flex justify-center order" >
+        <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+            <form action="" method="POST" >
+                {% csrf_token %}
+                <p>
+                    <label for="id_name">Name:</label>
+                    <input class="name-add" type="text" name="name" maxlength="200" required="" id="id_name">
+                </p>
+                
+                <p>
+                    <label for="id_available">Available:</label>
+                    <input class="available-add" type="checkbox" name="available" id="id_available">
+                </p>
+                
+                <p class="flex justify-center">
+                    <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400 js-add-giftCard" type="submit" data-url="{% url 'card_list' %}" data-token="{{token}}">Submit</button>
+                </p> 
+
+                <p class="w-max text-xl mt-4 text-red-500 errors-add-giftCard">
+            
+                </p>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock body %}

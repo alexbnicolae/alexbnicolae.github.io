@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>{% block title %}Home{% endblock title %}</title>
+</head>
+<body>
+    <nav class="bg-indigo-900 flex justify-between border-b-2 border-gray-800 p-2 font-semibold text-white">
+        <a class="no-underline text-white " href="{% url 'home' %}"><h1 class="text-3xl font-extrabold">Gift Cards</h1></a>
+
+        {% if request.user.is_authenticated %}
+            <a class="text-3xl font-extrabold underline text-gray-300" href="{% url 'account_logout' %}">Log out!</a>
+        {% else %}
+            <div>
+                <a class="text-3xl font-extrabold underline text-gray-300" href="{% url 'account_login' %}">Log in</a>
+                <a class="text-3xl font-extrabold underline text-gray-300" href="{% url 'account_signup' %}">Sign UP</a>
+            </div>
+        {% endif %}
+    </nav>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div {% if message.tags %} class="{{ message.tags }}"{% endif %}> 
+            {% if message.tags == "success" %}
+                <div class="flex font-bold text-xl text-white py-4 justify-center bg-green-500">{{ message }}</div>
+            {% elif message.tags == "info" %}
+                <div class="flex font-bold text-xl text-white py-4 justify-center bg-yellow-500">{{ message }}</div>
+            {% elif message.tags == "warning" %}
+                <div class="flex font-bold text-xl text-white py-4 justify-center bg-red-500">{{ message }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %} 
+
+    {% if request.user.is_authenticated %}
+    <div class="flex min-h-screen">
+        <div class="w-2/12 p-2 border-r-2 border-solid  border-black">
+            <div class="flex justify-center font-bold text-2xl">Info about my account:</div>
+            <div class="mt-5 font-bold text-xl">
+                &bull;<span class="text-gray-500">Username:</span>
+                <span class="">{{request.user.username}}</span>
+            </div>
+            {% if request.user.is_staff %}
+                <div class="mt-5 font-bold text-xl">
+                    &bull;<span class="text-gray-500">Admin</span>
+                </div>
+                <div class="mt-10" >
+                    <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'admin_zone_page' %}">ADMIN ZONE</a>
+                </div>
+            {% else %}
+                <div class="mt-5 font-bold text-xl ">
+                    &bull;<span class="text-gray-500">User</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="w-10/12  p-4">
+            {% block body %}
+            <div class="mt-10 flex justify-center" >
+                <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'displayCards' %}">Go to my Gift Cards</a>
+            </div>
+            {% endblock body %}
+        </div>
+    </div> 
+    
+    {% else %}
+    {% block content %}
+    <div style="margin:0; w-full">    
+        <div class="w-full h-screen bg-center bg-no-repeat bg-cover" style="background-image: url('https://images.unsplash.com/photo-1609342475528-dd7d93e8311e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80');">
+        <div class="w-full h-screen bg-opacity-50 bg-black flex justify-center items-center">
+            <div class="mx-4 text-center text-white">
+            <h1 class="font-bold text-6xl mb-4">Welcome!</h1>
+            <a href="{% url 'account_login' %}" class="bg-red-500 rounded-md font-extrabold text-white text-center px-3 py-3 transition duration-300 ease-in-out hover:bg-red-600 mr-2 text-xl" >
+                Log in!
+            </a>
+            <a class="my-10 bg-white rounded-md font-extrabold text-black text-center px-3 py-3 transition duration-300 ease-in-out hover:bg-red-600  text-xl" style="width: 50px;">
+                or
+            </a>
+            <a href="{% url 'account_signup' %}" class="bg-red-500 rounded-md font-extrabold text-white text-center px-3 py-3 transition duration-300 ease-in-out hover:bg-red-600 ml-2 text-xl" >
+                Sign up!
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endblock content %}
+    {% endif %}
+
+    
+    
+   
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{% static 'main.js' %}"></script>
+</html>

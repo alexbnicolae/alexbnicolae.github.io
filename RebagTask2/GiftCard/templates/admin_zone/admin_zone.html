@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+
+{% block body %}
+<div class=" flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">ADMIN ZONE</div>
+</div>
+
+<div class="flex">
+    <div class="w-1/2 flex flex-col items-center">
+        <div class="mt-10" >
+            <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'add_gift_card' %}">Add a gift card in the database</a>
+        </div>
+        <div class="mt-20" >
+            <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'admin_display_gc' %}">Show the gift cards from DB</a>
+        </div>
+    </div>
+    <div class="w-1/2 flex flex-col items-center">
+        <div class="mt-10" >
+            <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'admin_gift_card_user_post' %}">Give a Gift card to multiple users</a>
+        </div>
+        <div class="mt-20">
+            <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'admin_gift_card_user_edit' %}">Edit a Gift card amount to multiple users</a>
+        </div>
+        <div class="mt-20" >
+            <a class="border-solid border-black border-2 rounded-lg font-bold text-xl text-blue-600 p-5 bg-green-400 " href="{% url 'admin_gift_card_user_delete' %}">Delete a Gift card to multiple users</a>
+        </div>
+    </div>
+</div>
+    
+{% endblock body %}

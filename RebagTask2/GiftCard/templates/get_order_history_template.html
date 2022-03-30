@@ -1,0 +1,14 @@
+{% extends 'home.html' %}
+
+{% block title %}Order History{% endblock title %}
+{% block body %}
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Order History</div>
+</div>
+<div class="orderHistory" data-url="{% url 'get_order_history' orderH.id %}" data-token="{{token}}">
+    <div id="orderHistory" class="flex flex-wrap p-2 justify-evenly" data-true={{gc.available}}>
+    
+    </div>
+</div>    
+
+{% endblock body %}

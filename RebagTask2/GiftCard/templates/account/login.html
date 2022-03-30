@@ -1,0 +1,55 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}{% trans "Log In" %}{% endblock %}
+
+{% block content %}
+
+{% get_providers as socialaccount_providers %}
+
+{% comment %} {% if socialaccount_providers %} {% endcomment %}
+    <div class="mt-8 flex justify-center">
+        <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Log In</div>
+    </div>
+    <br/>
+    <div class="flex justify-center" >    
+        <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+            <form class="login " method="POST" action="{% url 'account_login' %}" >
+                {% csrf_token %}
+                <p class="flex flex-col my-4">
+                    <label class="text-2xl" for="id_login">E-mail:</label>
+                    <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400"  type="email" name="login" placeholder="E-mail address" autocomplete="email" required="" id="id_login">
+                </p>
+                <p class="flex flex-col my-4">
+                    <label class="text-2xl" for="id_password">Password:</label>
+                    <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="password" name="password" placeholder="Password" autocomplete="current-password" required="" id="id_password">
+                </p>
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <p class="flex justify-center">
+                    <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400" type="submit">Login</button>
+                </p>
+
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <div class="alert alert-error">
+                                <strong>{{ error|escape }}</strong>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <div class="alert alert-error">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+            </form>
+        </div>
+    </div>    
+{% comment %} {% endif %}   {% endcomment %}
+{% endblock %}

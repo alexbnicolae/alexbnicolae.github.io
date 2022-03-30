@@ -1,0 +1,52 @@
+{% extends 'home.html' %}
+
+{% block title %}Edit Order{% endblock title %}
+{% block body %}
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Edit Order</div>
+</div>
+{% if gc.available %}
+<div class="flex justify-center order" data-token="{{token}}">
+    <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+        <form action="" method="PUT" >
+            {% csrf_token %}
+            <p class="hidden">
+                <label for="id_giftCard">GiftCard:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 gc-put" type="text" name="productOrdered" maxlength="200" required="" value="{{ order.giftCard.id|default_if_none:''}}"> 
+            </p>
+
+        
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_productOrdered">ProductOrdered:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 po-put" type="text" name="productOrdered" maxlength="200" required="" id="id_productOrdered" value="{{ order.productOrdered|default_if_none:''}}">
+            </p>
+
+            
+            <p class="flex flex-col my-4">
+                <label class="text-xl" for="id_amount">Amount:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 a-put" type="number" name="amount" step="0.01" required="" id="id_amount" value="{{ order.amount|default_if_none:''}}">
+            </p>
+
+            
+            <p  class="flex flex-col my-4 hidden">
+                <label class="text-xl" for="id_date">Date:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 d-put" type="text" name="date" required="" id="id_date" value="{{ order.date|default_if_none:''}}">
+            </p>
+
+            
+            <p class="flex flex-col my-4 hidden">
+                <label class="text-xl" for="id_orderNumber">OrderNumber:</label>
+                <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400 on-put" type="text" name="orderNumber" value="{{ order.orderNumber|default_if_none:''}}" maxlength="200" required="" id="id_orderNumber">
+            </p> 
+            <p class="flex justify-center">
+                <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400 js-edit" type="submit" data-url="{% url 'order_detail' order.id %}">Submit</button>
+            </p>
+
+            <p class="w-max text-xl mt-4 text-red-500 errors-edit-order">
+            
+            </p>
+        </form>
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

@@ -1,0 +1,64 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Sign Up" %}{% endblock %}
+
+{% block content %}
+<div>
+ 
+  <div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Sign Up</div>
+</div>
+<br/>
+
+  <div class="flex justify-center" >    
+    <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        <p class="flex flex-col my-4">
+          <label class="text-2xl" for="id_email">E-mail:</label>
+          <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="email" name="email" placeholder="E-mail address" autocomplete="email" required="" id="id_email">
+        </p>
+    
+        <p class="flex flex-col my-4">
+          <label class="text-2xl" for="id_username">Username:</label>
+          <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="text" name="username" placeholder="Username" autocomplete="username" minlength="2" maxlength="150" required="" id="id_username">
+        </p>
+    
+        <p class="flex flex-col my-4">
+          <label class="text-2xl" for="id_password1">Password:</label>
+          <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="password" name="password1" placeholder="Password" autocomplete="new-password" required="" id="id_password1">
+        </p>
+    
+        <p class="flex flex-col my-4">
+          <label class="text-2xl" for="id_password2">Password (again):</label>
+          <input class="w-full px-10 py-1 text-center rounded-lg text-xl font-medium border-2 border-solid border-gray-400" type="password" name="password2" placeholder="Password (again)" autocomplete="new-password" required="" id="id_password2">
+        </p>
+    
+        <p class="flex justify-center">
+          <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400" type="submit">Sign up</button>
+        </p>
+        {% if form.errors %}
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <div class="alert alert-error">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-error">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+      </form>
+      
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

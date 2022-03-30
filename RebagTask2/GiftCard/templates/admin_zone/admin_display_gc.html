@@ -1,0 +1,25 @@
+{% extends 'home.html' %}
+
+{% block body %}
+
+{% if request.user.is_staff %}
+    <div class="mb-4 flex justify-center">
+        <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">Gift Cards</div>
+    </div>
+    <div id="displayCards" class="flex flex-wrap p-2 justify-evenly" >
+    {% for cgc in collectGC %}
+            <div class="inline-block border-black border-2 border-solid rounded-lg p-4 bg-yellow-200">
+                <div class="border-black border-b-2 border-solid  p-2 ">
+                    <div class="flex justify-center text-xl font-bold">&bull;Card Name:</div>
+                    <div class="flex justify-center text-xl font-bold text-blue-500">{{cgc.name}}</div>
+                </div>
+                <div class="border-black border-t-2 border-solid p-2 ">
+                    <div class="flex justify-center text-xl font-bold">&bull;Available:</div>
+                    <div class="flex justify-center text-xl font-bold text-blue-500">{{cgc.available}}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock body %}

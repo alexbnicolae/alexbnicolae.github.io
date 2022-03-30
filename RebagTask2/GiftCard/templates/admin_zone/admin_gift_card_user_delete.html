@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+
+{% block title %}Delete Gift Cards{% endblock title %}
+{% block body %}
+<div class="mt-8 flex justify-center">
+    <div class="no-underline text-3xl font-extrabold text-red-900 border-2 border-red-600 p-2 rounded-lg bg-pink-200">}Delete Gift Cards</div>
+</div>
+{% if request.user.is_staff %}
+    <div class="flex justify-center order" >
+        <div class="p-2 font-bold bg-red-100 m-10 border-2 border-solid border-black rounded-lg w-max "> 
+            <form action="" method="" >
+                {% csrf_token %}
+                <p>
+                    <div>
+                        <label for="id_user">User:</label>
+                    </div>
+                    <select class="admin-user-delete" name="user" required="" id="id_user" multiple>
+                        {% for f in form.user.field.choices %}
+                            <option value="{{f.0}}" >{{f.1}}</option> 
+                        {% endfor %}
+                    </select>
+                </p>
+                
+                <p>
+                    <label for="id_giftCard">GiftCard:</label>
+                    <select class="admin-giftCard-delete" name="giftCard" required="" id="id_giftCard">
+                        {% for f in form.giftCard.field.choices %}
+                            <option value="{{f.0}}" >{{f.1}}</option> 
+                        {% endfor %}
+                    </select>
+                </p>
+
+                <p class="flex justify-center">
+                    <button class="font-bold border-2 border-solid border-gray-400 rounded-lg p-2 text-2xl bg-yellow-400 js-admin-delete-giftCard" type="submit" data-url="{% url 'admin_gift_card' %}" data-token="{{token}}">Submit</button>
+                </p> 
+
+                <p class="w-max text-xl mt-4 text-red-500 errors-delete-admin-giftCard">
+            
+                </p>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock body %}
